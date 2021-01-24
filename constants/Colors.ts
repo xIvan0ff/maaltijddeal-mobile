@@ -12,6 +12,8 @@ export const colors = {
         primary: "#fe9900",
         secondary: "#1292eb",
         textOnPrimary: "#fff",
+
+        dim: "#111",
     },
     dark: {
         text: "#fff",
@@ -23,6 +25,8 @@ export const colors = {
         primary: "#fe9900",
         secondary: "#1292eb",
         textOnPrimary: "#fff",
+
+        dim: "#111",
     },
 }
 
