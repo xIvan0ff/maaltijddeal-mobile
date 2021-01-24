@@ -1,34 +1,34 @@
-import React from "react";
-import { Image, StyleProp } from "react-native";
-import { match } from "@utils/match.ts";
-import { View } from "./Themed";
+import React from "react"
+import { Image, StyleProp } from "react-native"
+import { match } from "@utils/match.ts"
+import { View } from "./Themed"
 
-const emptyStar = require("@assets/images/emptyStar.png");
-const fullStar = require("@assets/images/fullStar.png");
-const halfStar = require("@assets/images/halfStar.png");
+const emptyStar = require("@assets/images/emptyStar.png")
+const fullStar = require("@assets/images/fullStar.png")
+const halfStar = require("@assets/images/halfStar.png")
 
-type StarType = "full" | "half" | "empty";
+type StarType = "full" | "half" | "empty"
 
 interface IStarProps {
-    rating: number;
-    imageStyle?: any;
-    containerStyle?: any;
+    rating: number
+    imageStyle?: any
+    containerStyle?: any
 }
 
 interface IStarObjectProps {
-    starType: StarType;
-    imageStyle: any;
+    starType: StarType
+    imageStyle: any
 }
-const stars: any = [];
+const stars: any = []
 
 const StarObject: React.FC<IStarObjectProps> = ({ starType, imageStyle }) => {
     let source = match(starType, {
         full: fullStar,
         empty: emptyStar,
         half: halfStar,
-    });
-    return <Image style={imageStyle} source={source} />;
-};
+    })
+    return <Image style={imageStyle} source={source} />
+}
 
 export const Star: React.FC<IStarProps> = ({
     rating,
@@ -45,11 +45,11 @@ export const Star: React.FC<IStarProps> = ({
         stars.push(<StarObject starType="empty" key={i} />);
     }*/
 
-    const realRating = Math.floor(rating / 2);
+    const realRating = Math.floor(rating / 2)
 
-    const full = realRating;
-    const half = rating % 2 ? true : false;
-    const empty = 5 - realRating - +half;
+    const full = realRating
+    const half = rating % 2 ? true : false
+    const empty = 5 - realRating - +half
 
     return (
         <View style={containerStyle}>
@@ -61,14 +61,14 @@ export const Star: React.FC<IStarProps> = ({
                 <StarObject imageStyle={imageStyle} starType="empty" key={i} />
             ))}
         </View>
-    );
-};
+    )
+}
 
 const range = (n: number) => {
-    const array = [];
+    const array = []
     for (let i = 0; i < n; i++) {
-        array.push(i);
+        array.push(i)
     }
 
-    return array;
-};
+    return array
+}

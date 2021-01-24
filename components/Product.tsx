@@ -1,33 +1,33 @@
-import React, { useState } from "react";
-import { View, Text } from "./Themed";
-import { StyleSheet, Dimensions, Button, Image } from "react-native";
-import { FontAwesome5 } from "@expo/vector-icons";
-import { match } from "@utils/match";
-import { Star } from "./Star";
-import { spacer, spacerStyles } from "@styles/spacer";
-import { cn } from "@utils/cn";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import { Restaurant } from "../types";
+import React, { useState } from "react"
+import { View, Text } from "./Themed"
+import { StyleSheet, Dimensions, Button, Image } from "react-native"
+import { FontAwesome5 } from "@expo/vector-icons"
+import { match } from "@utils/match"
+import { Star } from "./Star"
+import { spacer, spacerStyles } from "@styles/spacer"
+import { cn } from "@utils/cn"
+import { TouchableOpacity } from "react-native-gesture-handler"
+import { Restaurant } from "../types"
 
-const placeholder = require("@assets/images/placeholder.png");
-const colorGradient = require("@assets/images/colorGradient.png");
+const placeholder = require("@assets/images/placeholder.png")
+const colorGradient = require("@assets/images/colorGradient.png")
 
-export type ProductState = "open" | "close" | "openInAnHour";
+export type ProductState = "open" | "close" | "openInAnHour"
 
 interface IProductProps {
-    id?: number;
-    title?: string;
-    description?: string;
-    price?: number;
-    restaurant: Restaurant;
-    reviews?: number;
-    image?: string;
-    rating?: number;
-    oldPrice?: number;
-    discount?: number;
-    state: ProductState;
+    id?: number
+    title?: string
+    description?: string
+    price?: number
+    restaurant: Restaurant
+    reviews?: number
+    image?: string
+    rating?: number
+    oldPrice?: number
+    discount?: number
+    state: ProductState
 }
-const btnColor = "#1292eb";
+const btnColor = "#1292eb"
 export const Product: React.FC<IProductProps> = (props) => {
     const statusText = match(props.state, {
         close: (
@@ -54,7 +54,7 @@ export const Product: React.FC<IProductProps> = (props) => {
                 </Text>
             </View>
         ),
-    });
+    })
     return (
         <TouchableOpacity style={{ padding: 0 }}>
             <View style={ProductStyles.container}>
@@ -117,8 +117,8 @@ export const Product: React.FC<IProductProps> = (props) => {
                 </View>
             </View>
         </TouchableOpacity>
-    );
-};
+    )
+}
 
 const ProductStyles = StyleSheet.create({
     container: {
@@ -240,4 +240,4 @@ const ProductStyles = StyleSheet.create({
         color: "white",
         fontSize: 24,
     },
-});
+})

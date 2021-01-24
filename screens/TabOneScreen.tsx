@@ -1,10 +1,10 @@
-import { Product } from "@components/Product";
-import * as React from "react";
-import { StyleSheet } from "react-native";
-import { Restaurant } from "../types";
+import { Product } from "@components/Product"
+import * as React from "react"
+import { StyleSheet } from "react-native"
+import { Restaurant } from "../types"
 
-import EditScreenInfo from "../components/EditScreenInfo";
-import { Text, View } from "../components/Themed";
+import EditScreenInfo from "../components/EditScreenInfo"
+import { Text, View } from "../components/Themed"
 const rest: Restaurant = {
     address: "address",
     category: ["category"],
@@ -28,7 +28,7 @@ const rest: Restaurant = {
     takeout: true,
     website: "website",
     workingHours: ["workingHours"],
-};
+}
 export default function TabOneScreen() {
     return (
         <View style={styles.container}>
@@ -43,7 +43,7 @@ export default function TabOneScreen() {
                 restaurant={rest}
             />
         </View>
-    );
+    )
 }
 
 const styles = StyleSheet.create({
@@ -61,4 +61,4 @@ const styles = StyleSheet.create({
         height: 1,
         width: "80%",
     },
-});
+})
