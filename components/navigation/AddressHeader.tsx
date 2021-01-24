@@ -44,7 +44,6 @@ export const AddressHeader: React.FC<IAddressHeaderProps> = ({
 const styles = StyleSheet.create({
     header: {
         height: 50,
-        marginTop: Platform.OS == "ios" ? 20 : StatusBar.currentHeight,
         overflow: "hidden",
         paddingBottom: 5,
     },

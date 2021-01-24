@@ -16,6 +16,7 @@ import { spacerStyles } from "@styles/spacer"
 import { cn } from "@utils/cn"
 import { useColors } from "@hooks/useColors"
 import { useNavigation } from "@react-navigation/native"
+import { SafeAreaView } from "react-native-safe-area-context"
 
 const logo = require("@assets/images/logo.png")
 
@@ -57,7 +58,6 @@ export const CustomHeader: React.FC<ICustomHeaderProps> = ({
 const styles = StyleSheet.create({
     header: {
         height: 50,
-        marginTop: Platform.OS == "ios" ? 20 : StatusBar.currentHeight,
         overflow: "hidden",
         paddingBottom: 5,
     },
