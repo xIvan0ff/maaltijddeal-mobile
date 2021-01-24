@@ -2,9 +2,14 @@ import React, { useState } from "react";
 import { View, Text } from "./Themed";
 import { StyleSheet, Dimensions, Button, Image } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
-import { match } from "@utils/match.ts";
+import { match } from "@utils/match";
+import { Star } from "./Star";
+import { spacer, spacerStyles } from "@styles/spacer";
+import { cn } from "@utils/cn";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { Restaurant } from "../types";
 
-const placeholder = require("@assets/images/productComponentPlaceholder.png");
+const placeholder = require("@assets/images/placeholder.png");
 const colorGradient = require("@assets/images/colorGradient.png");
 
 export type ProductState = "open" | "close" | "openInAnHour";
@@ -14,7 +19,7 @@ interface IProductProps {
     title?: string;
     description?: string;
     price?: number;
-    restaurant?: string;
+    restaurant: Restaurant;
     reviews?: number;
     image?: string;
     rating?: number;
@@ -22,7 +27,7 @@ interface IProductProps {
     discount?: number;
     state: ProductState;
 }
-
+const btnColor = "#1292eb";
 export const Product: React.FC<IProductProps> = (props) => {
     const statusText = match(props.state, {
         close: (
@@ -32,7 +37,9 @@ export const Product: React.FC<IProductProps> = (props) => {
                     backgroundColor: "grey",
                 }}
             >
-                <Text>Gesloten</Text>
+                <Text style={{ ...ProductStyles.stateText, color: "white" }}>
+                    Gesloten
+                </Text>
             </View>
         ),
         openInAnHour: (
@@ -42,38 +49,74 @@ export const Product: React.FC<IProductProps> = (props) => {
                     backgroundColor: "orange",
                 }}
             >
-                <Text>Opent over een uur</Text>
+                <Text style={{ ...ProductStyles.stateText, color: "white" }}>
+                    Opent over een uur
+                </Text>
             </View>
         ),
     });
     return (
-        <View style={ProductStyles.container}>
-            <View style={ProductStyles.imgContainer}>
-                <Image
-                    style={ProductStyles.image}
-                    source={colorGradient}
-                ></Image>
-                {statusText}
-            </View>
-            <View style={ProductStyles.infoContainer}>
-                <View style={ProductStyles.titleContainer}>
-                    <Text style={ProductStyles.title}>{props.title}</Text>
+        <TouchableOpacity style={{ padding: 0 }}>
+            <View style={ProductStyles.container}>
+                <View style={ProductStyles.imgContainer}>
+                    <Image
+                        style={ProductStyles.image}
+                        source={placeholder}
+                    ></Image>
+                    {statusText}
                 </View>
-                <View style={ProductStyles.priceLine}>
-                    <View style={ProductStyles.deliveryContainer}>
-                        <Text style={ProductStyles.deliveryText}>€7</Text>
+                <View style={ProductStyles.discountContainer}>
+                    <Text style={ProductStyles.discountText}>
+                        {props.discount}%
+                    </Text>
+                </View>
+                <View style={ProductStyles.infoContainer}>
+                    <View style={ProductStyles.titleContainer}>
+                        <Text style={ProductStyles.title}>{props.title}</Text>
                     </View>
-                    <View style={ProductStyles.priceContainer}>
-                        <Text style={ProductStyles.newPrice}>
-                            €{props.price}
-                        </Text>
-                        <Text style={ProductStyles.oldPrice}>
-                            €{props.oldPrice}
-                        </Text>
+                    <View style={ProductStyles.priceLine}>
+                        <View style={ProductStyles.deliveryContainer}>
+                            <Text style={ProductStyles.deliveryStaticText}>
+                                {props.restaurant.deliveryPrice !== 0
+                                    ? "Bezorgkosten"
+                                    : "Gratis bezorgen"}
+                            </Text>
+                            <Text style={ProductStyles.deliveryText}>
+                                {props.restaurant.deliveryPrice !== 0
+                                    ? "€" + props.restaurant.deliveryPrice
+                                    : ""}
+                            </Text>
+                        </View>
+                        <View style={ProductStyles.priceContainer}>
+                            <Text style={ProductStyles.newPrice}>
+                                €{props.price}
+                            </Text>
+                            <Text style={ProductStyles.oldPrice}>
+                                €{props.oldPrice}
+                            </Text>
+                        </View>
                     </View>
+                    <View style={ProductStyles.infoLine}>
+                        <FontAwesome5 name="utensils" size={20} color="gray" />
+                        <Text
+                            style={ProductStyles.restaurantText}
+                            numberOfLines={1}
+                        >
+                            {props.restaurant.name}
+                        </Text>
+                        <Star
+                            imageStyle={ProductStyles.starImage}
+                            containerStyle={ProductStyles.starContainer}
+                            rating={props.rating ?? 10}
+                        ></Star>
+                        <Text>({props.reviews})</Text>
+                    </View>
+                    <TouchableOpacity style={ProductStyles.buyButton}>
+                        <Text style={ProductStyles.buttonText}>BESTEL NU!</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
-        </View>
+        </TouchableOpacity>
     );
 };
 
@@ -91,8 +134,6 @@ const ProductStyles = StyleSheet.create({
         position: "relative",
     },
     infoContainer: {
-        backgroundColor: "blue",
-        height: 150,
         width: "100%",
     },
     statusContainer: {
@@ -111,40 +152,92 @@ const ProductStyles = StyleSheet.create({
     titleContainer: {
         justifyContent: "center",
         alignItems: "center",
-        height: "15%",
     },
     title: {
-        position: "absolute",
         top: 0,
+        fontWeight: "bold",
+        fontSize: 25,
     },
     deliveryContainer: {
         alignSelf: "flex-start",
-        left: 10,
+        flexDirection: "row",
+    },
+    deliveryStaticText: {
+        color: "gray",
+        fontSize: 18,
     },
     deliveryText: {
         alignSelf: "flex-end",
+        left: 5,
+        fontWeight: "bold",
+        fontSize: 20,
     },
     oldPrice: {
         color: "gray",
         alignSelf: "flex-end",
         textDecorationLine: "line-through",
+        fontSize: 18,
     },
     newPrice: {
         fontWeight: "bold",
         alignSelf: "flex-end",
-        fontSize: 16,
+        fontSize: 24,
     },
     priceContainer: {
         flexDirection: "row",
         justifyContent: "flex-end",
-        right: 10,
     },
-    ratingStar: {
+    starImage: {
         width: 20,
         height: 20,
     },
+    starContainer: {
+        flexDirection: "row",
+    },
     priceLine: {
+        ...spacerStyles.mxmd,
         justifyContent: "space-between",
         flexDirection: "row",
+    },
+    discountContainer: {
+        position: "absolute",
+        height: "10%",
+        aspectRatio: 1,
+        right: 0,
+        top: 0,
+        backgroundColor: "#fe9900",
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    discountText: {
+        fontSize: 35,
+        color: "white",
+    },
+    stateText: {
+        fontSize: 20,
+    },
+    infoLine: {
+        top: "2%",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        ...spacerStyles.mxmd,
+    },
+    restaurantText: {
+        fontSize: 20,
+        width: "60%",
+    },
+    buyButton: {
+        ...spacerStyles.mxmd,
+        top: 20,
+        height: 50,
+        width: "95%",
+        backgroundColor: btnColor,
+        justifyContent: "center",
+        alignItems: "center",
+        borderRadius: 100,
+    },
+    buttonText: {
+        color: "white",
+        fontSize: 24,
     },
 });
