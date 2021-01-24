@@ -7,19 +7,29 @@ import { Ionicons } from "@expo/vector-icons"
 import { textStyles } from "@styles/text"
 import { cn } from "@utils/cn"
 import { spacerStyles } from "@styles/spacer"
+import { TouchableOpacity } from "react-native-gesture-handler"
+import { useColors } from "@hooks/useColors"
 
-type IAddressHeaderProps = StackHeaderProps
+type IAddressHeaderProps = StackHeaderProps & {
+    onMenuPress?: () => void
+}
 
-export const AddressHeader: React.FC<IAddressHeaderProps> = () => {
+export const AddressHeader: React.FC<IAddressHeaderProps> = ({
+    onMenuPress,
+}) => {
+    const colors = useColors()
+
     return (
         <View style={styles.header}>
             <View style={cn(styles.container, spacerStyles.pxsm)}>
-                <Ionicons
-                    style={spacerStyles.mxsm}
-                    name="ios-menu-outline"
-                    size={24}
-                    color="black"
-                />
+                <TouchableOpacity onPress={onMenuPress}>
+                    <Ionicons
+                        style={spacerStyles.mxsm}
+                        name="md-menu"
+                        size={24}
+                        color={colors.primary}
+                    />
+                </TouchableOpacity>
                 <View>
                     <Text style={textStyles.bold} colorName="primary">
                         Address

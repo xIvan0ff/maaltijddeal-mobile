@@ -1,7 +1,7 @@
-const tintColorLight = "#2f95dc"
-const tintColorDark = "#fff"
+const tintColorLight = "#fe9900"
+const tintColorDark = "#fe9900"
 
-export default {
+export const colors = {
     light: {
         text: "#000",
         background: "#fff",
@@ -23,3 +23,5 @@ export default {
         textOnPrimary: "#fff",
     },
 }
+
+export default colors

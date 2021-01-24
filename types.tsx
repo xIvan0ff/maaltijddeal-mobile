@@ -20,3 +20,12 @@ export type TabTwoParamList = {
 export type HomeTabParamList = {
     HomeTabScreen: undefined
 }
+
+export type TOSTabParamList = {
+    TOSTabScreen: undefined
+}
+
+export type DrawerParamList = {
+    HomeTab: undefined
+    TOSTab: undefined
+}
