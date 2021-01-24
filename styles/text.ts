@@ -5,4 +5,10 @@ export const textStyles = StyleSheet.create({
         fontWeight: "bold",
         fontSize: 24,
     },
+    bold: {
+        fontWeight: "bold",
+    },
+    small: {
+        fontSize: 12,
+    },
 })
