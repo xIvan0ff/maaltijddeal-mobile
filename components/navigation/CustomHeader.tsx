@@ -1,7 +1,7 @@
 import { Header, StackHeaderProps } from "@react-navigation/stack"
 import * as React from "react"
 import { Image, Platform, StatusBar, StyleSheet } from "react-native"
-import { textStyles } from "../../styles/text"
+import { textStyles } from "@styles/text"
 import { Text, View } from "../Themed"
 
 const logo = require("@assets/images/logo.png")
@@ -11,13 +11,7 @@ type ICustomHeaderProps = StackHeaderProps
 export const CustomHeader: React.FC<ICustomHeaderProps> = ({ scene }) => {
     const { options } = scene.descriptor
 
-    const title =
-        typeof options.headerTitle !== "function" &&
-        options.headerTitle !== undefined
-            ? options.headerTitle
-            : options.title !== undefined
-            ? options.title
-            : scene.route.name
+    const title = options.headerTitle ?? scene.route.name
 
     return (
         <View style={styles.header}>
