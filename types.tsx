@@ -22,6 +22,34 @@ export type HomeTabParamList = {
     HomeTabScreen: undefined
 }
 
+export type Restaurant = {
+    id: string
+    name: string
+    description: string
+    address: string
+    postCode: string
+    city: string
+    website: string
+    email: string
+    phone: string
+    fax: string
+
+    logo: any
+    rating: number
+    ratingCount: number
+    reviews: any[]
+    location: any
+    category: string[]
+    workingHours: any[]
+
+    deliveryPrice?: number
+    freeDeliveryOrderAmount: number
+    minimumOrderAmount: number
+
+    delivery: boolean
+    takeout: boolean
+}
+
 export type TOSTabParamList = {
     TOSTabScreen: undefined
 }

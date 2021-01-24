@@ -13,4 +13,10 @@ export const spacerStyles = StyleSheet.create({
     pxsm: {
         paddingHorizontal: spacer.small,
     },
+    mxmd: {
+        marginHorizontal: spacer.medium,
+    },
+    pxmd: {
+        paddingHorizontal: spacer.medium,
+    },
 })
