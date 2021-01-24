@@ -1,3 +1,4 @@
+import { AddressHeader } from "@components/navigation/AddressHeader"
 import { Ionicons } from "@expo/vector-icons"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { createStackNavigator } from "@react-navigation/stack"
@@ -119,7 +120,7 @@ function HomeTabNavigator() {
                 name="HomeTabScreen"
                 component={HomeTabScreen}
                 options={{
-                    header: (props) => <CustomHeader {...props} />,
+                    header: (props) => <AddressHeader {...props} />,
                     headerTitle: "MaaltijdDeal",
                 }}
             />
