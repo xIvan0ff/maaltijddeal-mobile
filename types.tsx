@@ -7,6 +7,7 @@ export type BottomTabParamList = {
     TabOne: undefined
     TabTwo: undefined
     HomeTab: undefined
+    DealTab: undefined
 }
 
 export type TabOneParamList = {
@@ -47,4 +48,22 @@ export type Restaurant = {
 
     delivery: boolean
     takeout: boolean
+}
+
+export type TOSTabParamList = {
+    TOSTabScreen: undefined
+}
+
+export type DrawerParamList = {
+    HomeTab: undefined
+    TOSTab: undefined
+}
+
+export type DealTabParamList = {
+    DealTabScreen: undefined
+}
+
+export type HomeTopTabParamList = {
+    Delivery: undefined
+    PickUp: undefined
 }
