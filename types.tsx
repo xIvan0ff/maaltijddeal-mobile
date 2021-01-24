@@ -34,3 +34,8 @@ export type DrawerParamList = {
 export type DealTabParamList = {
     DealTabScreen: undefined
 }
+
+export type HomeTopTabParamList = {
+    Delivery: undefined
+    PickUp: undefined
+}

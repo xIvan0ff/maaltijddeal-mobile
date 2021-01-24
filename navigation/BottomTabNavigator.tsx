@@ -25,9 +25,13 @@ import {
     TabTwoParamList,
     TOSTabParamList,
     DealTabParamList,
+    HomeTopTabParamList,
 } from "../types"
 import { useNavigation } from "@react-navigation/native"
 import { useColors } from "@hooks/useColors"
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs"
+import { DeliveryScreen } from "@screens/DeliveryScreen"
+import { PickUpScreen } from "@screens/PickUpScreen"
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>()
 
@@ -135,7 +139,7 @@ function HomeTabNavigator() {
         <HomeTabStack.Navigator>
             <HomeTabStack.Screen
                 name="HomeTabScreen"
-                component={HomeTabScreen}
+                component={HomeTopTabNavigator}
                 options={{
                     header: (props) => (
                         <AddressHeader {...props} onMenuPress={onMenuPress} />
@@ -208,5 +212,25 @@ function DealTabNavigator() {
                 }}
             />
         </DealTabStack.Navigator>
+    )
+}
+
+const HomeTopTab = createMaterialTopTabNavigator<HomeTopTabParamList>()
+
+function HomeTopTabNavigator() {
+    const colors = useColors()
+
+    return (
+        <HomeTopTab.Navigator
+            tabBarOptions={{
+                activeTintColor: colors.primary,
+                indicatorStyle: {
+                    backgroundColor: colors.primary,
+                },
+            }}
+        >
+            <HomeTopTab.Screen name="Delivery" component={DeliveryScreen} />
+            <HomeTopTab.Screen name="PickUp" component={PickUpScreen} />
+        </HomeTopTab.Navigator>
     )
 }
