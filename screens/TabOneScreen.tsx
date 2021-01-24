@@ -8,7 +8,12 @@ import { Text, View } from "../components/Themed";
 export default function TabOneScreen() {
     return (
         <View style={styles.container}>
-            <Product title="product title" />
+            <Product
+                title="product title"
+                state="close"
+                price={40}
+                oldPrice={50}
+            />
         </View>
     );
 }
