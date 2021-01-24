@@ -3,6 +3,7 @@ import * as React from "react"
 import { Image, Platform, StatusBar, StyleSheet } from "react-native"
 import { textStyles } from "@styles/text"
 import { Text, View } from "../Themed"
+import { SafeAreaView } from "react-native-safe-area-context"
 
 const logo = require("@assets/images/logo.png")
 
@@ -28,7 +29,6 @@ export const CustomHeader: React.FC<ICustomHeaderProps> = ({ scene }) => {
 const styles = StyleSheet.create({
     header: {
         height: 75,
-        marginTop: Platform.OS == "ios" ? 20 : StatusBar.currentHeight,
     },
     container: {
         flex: 1,

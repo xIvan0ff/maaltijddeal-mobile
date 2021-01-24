@@ -2,10 +2,12 @@ import { Ionicons } from "@expo/vector-icons"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { createStackNavigator } from "@react-navigation/stack"
 import * as React from "react"
+import { SafeAreaView } from "react-native-safe-area-context"
 import { CustomHeader } from "../components/navigation/CustomHeader"
 
 import Colors from "../constants/Colors"
 import useColorScheme from "../hooks/useColorScheme"
+import { DealTabScreen } from "../screens/DealTabScreen"
 import { HomeTabScreen } from "../screens/HomeTabScreen"
 import TabOneScreen from "../screens/TabOneScreen"
 import TabTwoScreen from "../screens/TabTwoScreen"
@@ -14,6 +16,7 @@ import {
     HomeTabParamList,
     TabOneParamList,
     TabTwoParamList,
+    DealTabParamList,
 } from "../types"
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>()
@@ -22,38 +25,49 @@ export default function BottomTabNavigator() {
     const colorScheme = useColorScheme()
 
     return (
-        <BottomTab.Navigator
-            initialRouteName="TabOne"
-            tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}
-        >
-            <BottomTab.Screen
-                name="HomeTab"
-                component={HomeTabNavigator}
-                options={{
-                    tabBarIcon: ({ color }) => (
-                        <TabBarIcon name="ios-home" color={color} />
-                    ),
-                }}
-            />
-            <BottomTab.Screen
-                name="TabOne"
-                component={TabOneNavigator}
-                options={{
-                    tabBarIcon: ({ color }) => (
-                        <TabBarIcon name="ios-code" color={color} />
-                    ),
-                }}
-            />
-            <BottomTab.Screen
-                name="TabTwo"
-                component={TabTwoNavigator}
-                options={{
-                    tabBarIcon: ({ color }) => (
-                        <TabBarIcon name="ios-code" color={color} />
-                    ),
-                }}
-            />
-        </BottomTab.Navigator>
+        <SafeAreaView style={{ flex: 1 }}>
+            <BottomTab.Navigator
+                initialRouteName="HomeTab"
+                tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}
+            >
+                <BottomTab.Screen
+                    name="HomeTab"
+                    component={HomeTabNavigator}
+                    options={{
+                        tabBarIcon: ({ color }) => (
+                            <TabBarIcon name="ios-home" color={color} />
+                        ),
+                    }}
+                />
+                <BottomTab.Screen
+                    name="TabOne"
+                    component={TabOneNavigator}
+                    options={{
+                        tabBarIcon: ({ color }) => (
+                            <TabBarIcon name="ios-code" color={color} />
+                        ),
+                    }}
+                />
+                <BottomTab.Screen
+                    name="TabTwo"
+                    component={TabTwoNavigator}
+                    options={{
+                        tabBarIcon: ({ color }) => (
+                            <TabBarIcon name="ios-code" color={color} />
+                        ),
+                    }}
+                />
+                <BottomTab.Screen
+                    name="DealTab"
+                    component={DealTabNavigator}
+                    options={{
+                        tabBarIcon: ({ color }) => (
+                            <TabBarIcon name="ios-fast-food" color={color} />
+                        ),
+                    }}
+                />
+            </BottomTab.Navigator>
+        </SafeAreaView>
     )
 }
 
@@ -110,5 +124,21 @@ function HomeTabNavigator() {
                 }}
             />
         </HomeTabStack.Navigator>
+    )
+}
+const DealTabStack = createStackNavigator<DealTabParamList>()
+
+function DealTabNavigator() {
+    return (
+        <DealTabStack.Navigator>
+            <DealTabStack.Screen
+                name="DealTabScreen"
+                component={DealTabScreen}
+                options={{
+                    header: (props) => <CustomHeader {...props} />,
+                    headerTitle: "MaaltijdСделка",
+                }}
+            />
+        </DealTabStack.Navigator>
     )
 }
