@@ -125,6 +125,7 @@ const ProductStyles = StyleSheet.create({
         flex: 1,
         flexDirection: "column",
         width: "100%",
+        backgroundColor: "red",
     },
     imgContainer: {
         height: 300,
