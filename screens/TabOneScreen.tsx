@@ -1,10 +1,80 @@
 import { Product } from "@components/Product"
 import * as React from "react"
 import { StyleSheet } from "react-native"
-import { Restaurant } from "../types"
+import { Restaurant, Review, WorkingHour } from "../types"
 
 import EditScreenInfo from "../components/EditScreenInfo"
 import { Text, View } from "../components/Themed"
+import { RestaurantReviews } from "@components/RestaurantReviews"
+
+const reviews: Review[] = [
+    {
+        id: "id",
+        dateCreated: "19-09-2019",
+        dealId: "dealId",
+        comment:
+            "commenttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt",
+        name: "Alex",
+        restaurantId: "restaurantId",
+        score: 7,
+        visible: true,
+    },
+    {
+        id: "id2",
+        dateCreated: "11-12-2020",
+        dealId: "dealId",
+        comment:
+            "commenttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt",
+        name: "John",
+        restaurantId: "restaurantId",
+        score: 4,
+        visible: true,
+    },
+]
+const workingHours: WorkingHour[] = [
+    {
+        workDay: 0,
+        openTime: "10:00",
+        closeTime: "11:00",
+        closedAllDay: false,
+    },
+    {
+        workDay: 1,
+        openTime: "12:00",
+        closeTime: "13:00",
+        closedAllDay: false,
+    },
+    {
+        workDay: 2,
+        openTime: "14:00",
+        closeTime: "15:00",
+        closedAllDay: false,
+    },
+    {
+        workDay: 3,
+        openTime: "16:00",
+        closeTime: "17:00",
+        closedAllDay: false,
+    },
+    {
+        workDay: 4,
+        openTime: "18:00",
+        closeTime: "19:00",
+        closedAllDay: false,
+    },
+    {
+        workDay: 5,
+        openTime: "20:00",
+        closeTime: "21:00",
+        closedAllDay: false,
+    },
+    {
+        workDay: 6,
+        openTime: "22:00",
+        closeTime: "23:00",
+        closedAllDay: false,
+    },
+]
 const rest: Restaurant = {
     address: "address",
     category: ["category"],
@@ -24,15 +94,15 @@ const rest: Restaurant = {
     postCode: "postcode",
     rating: 7,
     ratingCount: 8,
-    reviews: ["reviews"],
+    reviews: [...reviews, ...reviews, ...reviews, ...reviews],
     takeout: true,
     website: "website",
-    workingHours: ["workingHours"],
+    workingHours,
 }
 export default function TabOneScreen() {
     return (
         <View style={styles.container}>
-            <Product
+            {/* <Product
                 title="Shish tawook met frisdrank"
                 state="open"
                 price={11.01}
@@ -41,7 +111,8 @@ export default function TabOneScreen() {
                 reviews={7}
                 rating={7}
                 restaurant={rest}
-            />
+            /> */}
+            <RestaurantReviews restaurant={rest} />
         </View>
     )
 }
