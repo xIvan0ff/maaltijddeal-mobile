@@ -1,3 +1,4 @@
+import { View } from "@components/Themed"
 import { StatusBar } from "expo-status-bar"
 import React from "react"
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context"
