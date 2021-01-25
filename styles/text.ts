@@ -2,11 +2,11 @@ import { StyleSheet } from "react-native"
 
 export const textStyles = StyleSheet.create({
     title: {
-        fontWeight: "bold",
+        fontFamily: "rubik-bold",
         fontSize: 20,
     },
     bold: {
-        fontWeight: "bold",
+        fontFamily: "rubik-bold",
     },
     small: {
         fontSize: 12,
