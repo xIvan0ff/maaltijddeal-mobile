@@ -52,7 +52,7 @@ const ReviewsStyles = StyleSheet.create({
     nameLine: {
         width: "100%",
         height: "10%",
-        borderBottomWidth: 1,
+        borderBottomWidth: 2,
         borderColor: "black",
         justifyContent: "space-between",
         flexDirection: "row",
@@ -60,10 +60,12 @@ const ReviewsStyles = StyleSheet.create({
     },
     starContainer: {
         flexDirection: "row",
+        justifyContent: "space-between",
     },
     starStyle: {
         height: starSize,
         width: starSize,
+        marginHorizontal: 1,
     },
     nameText: {
         fontSize: 24,
@@ -78,7 +80,7 @@ const ReviewsStyles = StyleSheet.create({
     reviewLine: {
         width: "100%",
         height: "10%",
-        borderBottomWidth: 1,
+        borderBottomWidth: 2,
         borderColor: "black",
         justifyContent: "center",
     },

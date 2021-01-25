@@ -12,13 +12,22 @@ interface IReviewComponent {
 export const ReviewComponent: React.FC<IReviewComponent> = ({ review }) => {
     return (
         <View style={ReviewStyles.container}>
-            <Text style={ReviewStyles.nameText}>{review.name}</Text>
-            <Star
-                rating={review.score}
-                containerStyle={ReviewStyles.starContainer}
-                imageStyle={ReviewStyles.star}
-            />
-            <Text style={ReviewStyles.dateText}>{review.dateCreated}</Text>
+            <View
+                style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                }}
+            >
+                <View>
+                    <Text style={ReviewStyles.nameText}>{review.name}</Text>
+                    <Star
+                        rating={review.score}
+                        containerStyle={ReviewStyles.starContainer}
+                        imageStyle={ReviewStyles.star}
+                    />
+                </View>
+                <Text style={ReviewStyles.dateText}>{review.dateCreated}</Text>
+            </View>
             <Text style={ReviewStyles.description}>{review.comment}</Text>
         </View>
     )
@@ -28,8 +37,8 @@ const ReviewStyles = StyleSheet.create({
     container: {
         width: "100%",
         flexDirection: "column",
-        borderBottomWidth: 1,
-        borderColor: "black",
+        borderBottomWidth: 2,
+        borderColor: "#A0A0A0",
         paddingVertical: 10,
     },
     nameText: {
