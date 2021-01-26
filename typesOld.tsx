@@ -46,10 +46,10 @@ export type Restaurant = {
     logo: any
     rating: number
     ratingCount: number
-    reviews: any[]
+    reviews: Review[]
     location: any
     category: string[]
-    workingHours: any[]
+    workingHours: WorkingHour[]
 
     deliveryPrice?: number
     freeDeliveryOrderAmount: number
@@ -66,4 +66,22 @@ export type TOSTabParamList = {
 export type HomeTopTabParamList = {
     Delivery: undefined
     PickUp: undefined
+}
+
+export type WorkingHour = {
+    workDay: number
+    openTime: string
+    closeTime: string
+    closedAllDay: boolean
+}
+
+export type Review = {
+    id: string
+    dealId: string
+    restaurantId: string
+    score: number
+    comment: string
+    name: string
+    dateCreated: string
+    visible: boolean
 }

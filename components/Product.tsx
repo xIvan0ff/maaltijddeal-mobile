@@ -55,12 +55,7 @@ export const Product: React.FC<IProductProps> = (props) => {
                     backgroundColor: "orange",
                 }}
             >
-                <Text
-                    style={{
-                        ...ProductStyles.stateText,
-                        color: "white",
-                    }}
-                >
+                <Text style={{ ...ProductStyles.stateText, color: "white" }}>
                     Opent over een uur
                 </Text>
             </View>
@@ -213,6 +208,8 @@ const ProductStyles = StyleSheet.create({
     },
     title: {
         top: 0,
+        fontWeight: "bold",
+        fontSize: 25,
     },
     deliveryContainer: {
         alignSelf: "flex-start",
@@ -224,7 +221,9 @@ const ProductStyles = StyleSheet.create({
     },
     deliveryText: {
         alignSelf: "flex-end",
-        marginLeft: 5,
+        left: 5,
+        fontWeight: "bold",
+        fontSize: 20,
     },
     oldPrice: {
         color: "gray",

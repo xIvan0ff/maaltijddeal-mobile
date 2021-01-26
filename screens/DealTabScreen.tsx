@@ -1,6 +1,10 @@
 import { Ionicons } from "@expo/vector-icons"
+import { useColors } from "@hooks/useColors"
+import { textStyles } from "@styles/text"
+import { cn } from "@utils/cn"
 import * as React from "react"
 import { Dimensions, Image, StyleSheet } from "react-native"
+import { ScrollView } from "react-native-gesture-handler"
 import { SafeAreaView } from "react-native-safe-area-context"
 import { View, Text } from "../components/Themed"
 
@@ -10,50 +14,174 @@ const window = Dimensions.get("window")
 export const DealTabScreen: React.FC = () => {
     return (
         <View style={styles.container}>
-            <Image source={logo} style={styles.dealImage} />
-            <View style={styles.dealRestaurant} colorName="primary">
-                <View
-                    style={styles.dealRestaurantNameContainer}
-                    colorName="primary"
-                >
-                    <Text
-                        colorName="textOnPrimary"
-                        style={styles.dealRestaurantName}
-                    >
-                        Restaurant Name
-                    </Text>
-                </View>
-                <View
-                    style={styles.dealRestaurantInfoContainer}
-                    colorName="primary"
-                >
-                    <Ionicons
-                        name="ios-information-circle"
-                        size={38}
-                        color="white"
-                    />
-                </View>
-            </View>
-            <View style={styles.dealInfo}>
-                <View style={styles.dealTitlePrice}>
-                    <Text style={styles.dealTitle}>
-                        Pasta naar keuze met blikje cola
-                    </Text>
-                    <View style={styles.dealPriceContainer}>
-                        <Text style={styles.dealPrice}>$30.30</Text>
+            <ScrollView stickyHeaderIndices={[1]} style={styles.container}>
+                <Image source={logo} style={styles.dealImage} />
+                <View>
+                    <View style={styles.dealRestaurant} colorName="primary">
+                        <View
+                            style={styles.dealRestaurantNameContainer}
+                            colorName="primary"
+                        >
+                            <Text
+                                colorName="textOnPrimary"
+                                style={textStyles.title}
+                            >
+                                Restaurant Name
+                            </Text>
+                        </View>
+                        <View
+                            style={styles.dealRestaurantInfoContainer}
+                            colorName="primary"
+                        >
+                            <Ionicons
+                                name="ios-information-circle"
+                                size={38}
+                                color="white"
+                            />
+                        </View>
                     </View>
                 </View>
-                <Text>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    Duis aute irure dolor in reprehenderit in voluptate velit
-                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                    occaecat cupidatat non proident, sunt in culpa qui officia
-                    deserunt mollit anim id est laborum.
-                </Text>
-            </View>
+                <View style={styles.dealOverview}>
+                    <View style={styles.dealInfo}>
+                        <View style={styles.dealTitlePrice}>
+                            <Text
+                                style={cn(textStyles.title, styles.dealTitle)}
+                            >
+                                Pasta naar keuze met blikje cola
+                            </Text>
+                            <View style={styles.dealPriceContainer}>
+                                <Text style={styles.dealPrice}>$30.30</Text>
+                            </View>
+                        </View>
+                        <Text style={styles.dealDescription}>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing
+                            elit, sed do eiusmod tempor incididunt ut labore et
+                            dolore magna aliqua. Ut enim ad minim veniam, quis
+                            nostrud exercitation ullamco laboris nisi ut aliquip
+                            ex ea commodo consequat. Duis aute irure dolor in
+                            reprehenderit in voluptate velit esse cillum dolore
+                            eu fugiat nulla pariatur. Excepteur sint occaecat
+                            cupidatat non proident, sunt in culpa qui officia
+                            deserunt mollit anim id est laborum.
+                        </Text>
+                    </View>
+                    <View style={styles.dealOptionsContainer}>
+                        <Text colorName="secondary" style={textStyles.title}>
+                            Opties bij deze deal
+                        </Text>
+                        <View style={styles.dealOptions}>
+                            <View style={styles.dealOption}>
+                                <View style={styles.dealOptionInfo}>
+                                    <Text
+                                        colorName="secondary"
+                                        style={cn(
+                                            textStyles.bold,
+                                            styles.dealOptionTitle
+                                        )}
+                                    >
+                                        Malko testwame tuka teksta
+                                    </Text>
+                                    <Text colorName="text">
+                                        Lorem ipsum dolor sit amet, consectetur
+                                        adipiscing elit, sed do eiusmod tempor
+                                        incididunt ut labore et dolore magna
+                                        aliqua.
+                                    </Text>
+                                </View>
+                                <View style={styles.dealOptionPrice}>
+                                    <Text
+                                        colorName="primary"
+                                        style={styles.dealOptionPriceText}
+                                    >
+                                        $30.00
+                                    </Text>
+                                </View>
+                            </View>
+                            <View style={styles.dealOption}>
+                                <View style={styles.dealOptionInfo}>
+                                    <Text
+                                        colorName="secondary"
+                                        style={cn(
+                                            textStyles.bold,
+                                            styles.dealOptionTitle
+                                        )}
+                                    >
+                                        Malko testwame tuka teksta
+                                    </Text>
+                                    <Text colorName="text">
+                                        Lorem ipsum dolor sit amet, consectetur
+                                        adipiscing elit, sed do eiusmod tempor
+                                        incididunt ut labore et dolore magna
+                                        aliqua.
+                                    </Text>
+                                </View>
+                                <View style={styles.dealOptionPrice}>
+                                    <Text
+                                        colorName="primary"
+                                        style={styles.dealOptionPriceText}
+                                    >
+                                        $30.00
+                                    </Text>
+                                </View>
+                            </View>
+                            <View style={styles.dealOption}>
+                                <View style={styles.dealOptionInfo}>
+                                    <Text
+                                        colorName="secondary"
+                                        style={cn(
+                                            textStyles.bold,
+                                            styles.dealOptionTitle
+                                        )}
+                                    >
+                                        Malko testwame tuka teksta
+                                    </Text>
+                                    <Text colorName="text">
+                                        Lorem ipsum dolor sit amet, consectetur
+                                        adipiscing elit, sed do eiusmod tempor
+                                        incididunt ut labore et dolore magna
+                                        aliqua.
+                                    </Text>
+                                </View>
+                                <View style={styles.dealOptionPrice}>
+                                    <Text
+                                        colorName="primary"
+                                        style={styles.dealOptionPriceText}
+                                    >
+                                        $30.00
+                                    </Text>
+                                </View>
+                            </View>
+                            <View style={styles.dealOption}>
+                                <View style={styles.dealOptionInfo}>
+                                    <Text
+                                        colorName="secondary"
+                                        style={cn(
+                                            textStyles.bold,
+                                            styles.dealOptionTitle
+                                        )}
+                                    >
+                                        Malko testwame tuka teksta
+                                    </Text>
+                                    <Text colorName="text">
+                                        Lorem ipsum dolor sit amet, consectetur
+                                        adipiscing elit, sed do eiusmod tempor
+                                        incididunt ut labore et dolore magna
+                                        aliqua.
+                                    </Text>
+                                </View>
+                                <View style={styles.dealOptionPrice}>
+                                    <Text
+                                        colorName="primary"
+                                        style={styles.dealOptionPriceText}
+                                    >
+                                        $30.00
+                                    </Text>
+                                </View>
+                            </View>
+                        </View>
+                    </View>
+                </View>
+            </ScrollView>
         </View>
     )
 }
@@ -63,33 +191,34 @@ const styles = StyleSheet.create({
         height: "100%",
     },
     dealImage: {
-        height: 250,
+        height: 200,
         width: "100%",
     },
     dealRestaurant: {
-        height: 60,
         padding: 10,
-        display: "flex",
         flexDirection: "row",
-        justifyContent: "center",
         alignItems: "center",
+        justifyContent: "center",
     },
-    dealRestaurantName: { fontWeight: "bold", fontSize: 20 },
-    dealRestaurantNameContainer: { flex: 3 },
+    dealRestaurantNameContainer: {
+        flex: 3,
+    },
     dealRestaurantInfoContainer: {
         flex: 1,
-        display: "flex",
         flexDirection: "row",
         justifyContent: "flex-end",
     },
+    dealOverview: { margin: 15 },
     dealInfo: {
-        padding: 15,
+        paddingBottom: 15,
+        borderBottomWidth: 1,
+        borderBottomColor: "#ebebeb",
     },
     dealTitle: {
-        fontWeight: "bold",
-        fontSize: 18,
         flex: 2,
+        fontSize: 18,
     },
+    dealDescription: { fontSize: 13 },
     dealTitlePrice: {
         display: "flex",
         flexDirection: "row",
@@ -101,4 +230,28 @@ const styles = StyleSheet.create({
         justifyContent: "flex-end",
     },
     dealPrice: { fontSize: 18 },
+    dealOptionsContainer: { marginTop: 20 },
+    dealOptions: {},
+    dealOption: {
+        marginTop: 10,
+        borderBottomWidth: 1,
+        borderBottomColor: "#ebebeb",
+        flexDirection: "row",
+    },
+    dealOptionTitle: {
+        fontSize: 18,
+    },
+    dealOptionInfo: {
+        flex: 4,
+        flexDirection: "column",
+        alignItems: "flex-start",
+    },
+    dealOptionPrice: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "flex-end",
+    },
+    dealOptionPriceText: {
+        fontSize: 16,
+    },
 })
