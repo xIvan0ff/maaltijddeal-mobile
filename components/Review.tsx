@@ -16,17 +16,29 @@ export const ReviewComponent: React.FC<IReviewComponent> = ({ review }) => {
                 style={{
                     flexDirection: "row",
                     justifyContent: "space-between",
+                    alignItems: "center",
                 }}
             >
-                <View>
-                    <Text style={ReviewStyles.nameText}>{review.name}</Text>
-                    <Star
-                        rating={review.score}
-                        containerStyle={ReviewStyles.starContainer}
-                        imageStyle={ReviewStyles.star}
-                    />
+                <View style={ReviewStyles.textContainer}>
+                    <View style={ReviewStyles.nameReviewContainer}>
+                        <Text
+                            style={ReviewStyles.nameText}
+                            colorName="secondary"
+                        >
+                            {review.name}
+                        </Text>
+                        <Star
+                            rating={review.score}
+                            containerStyle={ReviewStyles.starContainer}
+                            imageStyle={ReviewStyles.star}
+                        />
+                    </View>
+                    <View style={ReviewStyles.dateContainer}>
+                        <Text style={ReviewStyles.dateText}>
+                            {review.dateCreated}
+                        </Text>
+                    </View>
                 </View>
-                <Text style={ReviewStyles.dateText}>{review.dateCreated}</Text>
             </View>
             <Text style={ReviewStyles.description}>{review.comment}</Text>
         </View>
@@ -42,7 +54,6 @@ const ReviewStyles = StyleSheet.create({
         paddingVertical: 10,
     },
     nameText: {
-        color: "cyan",
         fontSize: 30,
         ...textStyles.bold,
     },
@@ -55,9 +66,21 @@ const ReviewStyles = StyleSheet.create({
         width: starSize,
     },
     dateText: {
-        fontSize: 18,
+        fontSize: 14,
     },
     description: {
         fontSize: 16,
+    },
+    textContainer: {
+        flexDirection: "row",
+    },
+    nameReviewContainer: {
+        flexDirection: "column",
+        flex: 2,
+    },
+    dateContainer: {
+        flex: 1,
+        justifyContent: "flex-end",
+        alignItems: "flex-end",
     },
 })

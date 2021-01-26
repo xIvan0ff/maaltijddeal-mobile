@@ -65,7 +65,6 @@ const ReviewsStyles = StyleSheet.create({
     starStyle: {
         height: starSize,
         width: starSize,
-        marginHorizontal: 1,
     },
     nameText: {
         fontSize: 24,
