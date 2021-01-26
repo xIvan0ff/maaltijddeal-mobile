@@ -8,6 +8,7 @@ import { StyleSheet } from "react-native"
 import EditScreenInfo from "../components/EditScreenInfo"
 import { Text, View } from "../components/Themed"
 import { OrderFinish } from "@components/OrderFinish"
+import { FilterPage } from "@components/FilterPage"
 
 const reviews: Review[] = [
     {
@@ -106,7 +107,8 @@ export default function TabTwoScreen() {
     return (
         <View style={styles.container}>
             {/* <RestaurantInfo restaurant={rest} /> */}
-            <OrderFinish />
+            {/* <OrderFinish /> */}
+            <FilterPage />
         </View>
     )
 }
