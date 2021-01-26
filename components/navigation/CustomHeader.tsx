@@ -20,28 +20,23 @@ import { SafeAreaView } from "react-native-safe-area-context"
 
 const logo = require("@assets/images/logo.png")
 
-type ICustomHeaderProps = (StackHeaderProps | DrawerHeaderProps) & {
-    onBackPress?: () => void
-}
+type ICustomHeaderProps = StackHeaderProps | DrawerHeaderProps
 
-export const CustomHeader: React.FC<ICustomHeaderProps> = ({
-    scene,
-    onBackPress,
-}) => {
+export const CustomHeader: React.FC<ICustomHeaderProps> = ({ scene }) => {
     const colors = useColors()
     const { options } = scene.descriptor
     const title = options.headerTitle ?? scene.route.name
 
     const navigation = useNavigation()
 
-    const test = () => {
+    const onBackPress = () => {
         navigation.goBack()
     }
 
     return (
         <View style={styles.header}>
             <View style={cn(styles.container, spacerStyles.pxsm)}>
-                <TouchableOpacity onPress={test}>
+                <TouchableOpacity onPress={onBackPress}>
                     <Ionicons
                         name="arrow-back"
                         size={24}
@@ -66,6 +61,7 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: "row",
         alignItems: "center",
+        paddingTop: 5,
     },
     logo: {
         width: 57,

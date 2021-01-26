@@ -1,14 +1,15 @@
 import React, { useState } from "react"
 import { View, Text } from "./Themed"
-import { StyleSheet, Dimensions, Button, Image } from "react-native"
+import { StyleSheet, Image, TouchableOpacity } from "react-native"
 import { FontAwesome5 } from "@expo/vector-icons"
 import { match } from "@utils/match"
 import { Star } from "./Star"
 import { spacer, spacerStyles } from "@styles/spacer"
 import { cn } from "@utils/cn"
-import { TouchableOpacity } from "react-native-gesture-handler"
-import { Restaurant } from "../types"
+import { Restaurant } from "../typesOld"
 import { textStyles } from "@styles/text"
+import { containerStyles } from "@styles/container"
+import { useColors } from "@hooks/useColors"
 
 const placeholder = require("@assets/images/placeholder.png")
 const colorGradient = require("@assets/images/colorGradient.png")
@@ -27,9 +28,13 @@ interface IProductProps {
     oldPrice?: number
     discount?: number
     state: ProductState
+
+    onPress?: () => void
 }
 const btnColor = "#1292eb"
 export const Product: React.FC<IProductProps> = (props) => {
+    const colors = useColors()
+
     const statusText = match(props.state, {
         close: (
             <View
@@ -62,75 +67,114 @@ export const Product: React.FC<IProductProps> = (props) => {
         ),
     })
     return (
-        <View style={ProductStyles.container}>
-            <View style={ProductStyles.imgContainer}>
-                <Image style={ProductStyles.image} source={placeholder}></Image>
-                {statusText}
-            </View>
-            <View style={ProductStyles.discountContainer}>
-                <Text style={ProductStyles.discountText}>
-                    {props.discount}%
-                </Text>
-            </View>
-            <View style={ProductStyles.infoContainer}>
-                <View style={ProductStyles.titleContainer}>
-                    <Text style={cn(ProductStyles.title, textStyles.title)}>
-                        {props.title}
-                    </Text>
+        <TouchableOpacity onPress={props.onPress}>
+            <View style={ProductStyles.container}>
+                <View style={ProductStyles.imgContainer}>
+                    <Image
+                        style={ProductStyles.image}
+                        source={placeholder}
+                    ></Image>
+                    {statusText}
                 </View>
-                <View style={ProductStyles.priceLine}>
-                    <View style={ProductStyles.deliveryContainer}>
-                        <Text
-                            style={cn(
-                                ProductStyles.deliveryStaticText,
-                                textStyles.small
-                            )}
-                        >
-                            {props.restaurant.deliveryPrice !== 0
-                                ? "Bezorgkosten"
-                                : "Gratis bezorgen"}
-                        </Text>
-                        <Text
-                            style={cn(
-                                ProductStyles.deliveryText,
-                                textStyles.small,
-                                textStyles.bold
-                            )}
-                        >
-                            {props.restaurant.deliveryPrice !== 0
-                                ? "€" + props.restaurant.deliveryPrice
-                                : ""}
-                        </Text>
-                    </View>
-                    <View style={ProductStyles.priceContainer}>
-                        <Text style={ProductStyles.newPrice}>
-                            €{props.price}
-                        </Text>
-                        <Text style={ProductStyles.oldPrice}>
-                            €{props.oldPrice}
-                        </Text>
-                    </View>
-                </View>
-                <View style={ProductStyles.infoLine}>
-                    <FontAwesome5 name="utensils" size={20} color="gray" />
+                <View
+                    style={cn(ProductStyles.discountContainer, {
+                        backgroundColor: colors.primary,
+                    })}
+                >
                     <Text
-                        style={ProductStyles.restaurantText}
-                        numberOfLines={1}
+                        style={cn(ProductStyles.discountText, textStyles.title)}
                     >
-                        {props.restaurant.name}
+                        {props.discount}%
                     </Text>
-                    <Star
-                        imageStyle={ProductStyles.starImage}
-                        containerStyle={ProductStyles.starContainer}
-                        rating={props.rating ?? 10}
-                    ></Star>
-                    <Text>({props.reviews})</Text>
                 </View>
-                <TouchableOpacity style={ProductStyles.buyButton}>
-                    <Text style={ProductStyles.buttonText}>BESTEL NU!</Text>
-                </TouchableOpacity>
+                <View
+                    style={cn(ProductStyles.infoContainer, spacerStyles.mysm)}
+                >
+                    <View style={ProductStyles.titleContainer}>
+                        <Text style={cn(ProductStyles.title, textStyles.title)}>
+                            {props.title}
+                        </Text>
+                    </View>
+                    <View style={ProductStyles.priceLine}>
+                        <View style={ProductStyles.deliveryContainer}>
+                            <Text
+                                style={cn(
+                                    ProductStyles.deliveryStaticText,
+                                    textStyles.small
+                                )}
+                            >
+                                {props.restaurant.deliveryPrice !== 0
+                                    ? "Bezorgkosten"
+                                    : "Gratis bezorgen"}
+                            </Text>
+                            <Text
+                                style={cn(
+                                    ProductStyles.deliveryText,
+                                    textStyles.small,
+                                    textStyles.bold
+                                )}
+                            >
+                                {props.restaurant.deliveryPrice !== 0
+                                    ? "€" + props.restaurant.deliveryPrice
+                                    : ""}
+                            </Text>
+                        </View>
+                        <View style={ProductStyles.priceContainer}>
+                            <Text
+                                style={cn(
+                                    ProductStyles.newPrice,
+                                    textStyles.bold
+                                )}
+                            >
+                                €{props.price}
+                            </Text>
+                            <Text style={ProductStyles.oldPrice}>
+                                €{props.oldPrice}
+                            </Text>
+                        </View>
+                    </View>
+                    <View style={ProductStyles.infoLine}>
+                        <View
+                            style={cn(
+                                containerStyles.row,
+                                containerStyles.flex1
+                            )}
+                        >
+                            <FontAwesome5
+                                name="utensils"
+                                size={16}
+                                color="gray"
+                            />
+                            <Text
+                                numberOfLines={1}
+                                style={cn(
+                                    spacerStyles.mxsm,
+                                    containerStyles.flex1
+                                )}
+                            >
+                                {props.restaurant.name}
+                            </Text>
+                        </View>
+
+                        <View style={containerStyles.row}>
+                            <View style={spacerStyles.mxsm}>
+                                <Star
+                                    imageStyle={ProductStyles.starImage}
+                                    containerStyle={ProductStyles.starContainer}
+                                    rating={props.rating ?? 10}
+                                ></Star>
+                            </View>
+                            <Text>({props.reviews})</Text>
+                        </View>
+                    </View>
+                    {/* <TouchableOpacity style={ProductStyles.buyButton}>
+                    <Text style={cn(ProductStyles.buttonText, textStyles.big)}>
+                        BESTEL NU!
+                    </Text>
+                </TouchableOpacity> */}
+                </View>
             </View>
-        </View>
+        </TouchableOpacity>
     )
 }
 
@@ -138,10 +182,10 @@ const ProductStyles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: "column",
-        width: "100%",
+        alignSelf: "stretch",
     },
     imgContainer: {
-        height: 300,
+        height: 150,
         width: "100%",
         justifyContent: "center",
         alignItems: "center",
@@ -153,10 +197,10 @@ const ProductStyles = StyleSheet.create({
     statusContainer: {
         position: "absolute",
         width: "90%",
-        height: "10%",
         bottom: "5%",
         justifyContent: "center",
         alignItems: "center",
+        padding: spacer.medium,
     },
     image: {
         position: "absolute",
@@ -186,12 +230,10 @@ const ProductStyles = StyleSheet.create({
         color: "gray",
         alignSelf: "flex-end",
         textDecorationLine: "line-through",
-        fontSize: 18,
+        marginLeft: 5,
     },
     newPrice: {
-        fontWeight: "bold",
         alignSelf: "flex-end",
-        fontSize: 24,
     },
     priceContainer: {
         flexDirection: "row",
@@ -205,40 +247,31 @@ const ProductStyles = StyleSheet.create({
         flexDirection: "row",
     },
     priceLine: {
-        ...spacerStyles.mxmd,
         justifyContent: "space-between",
         flexDirection: "row",
     },
     discountContainer: {
         position: "absolute",
-        height: "10%",
-        aspectRatio: 1,
         right: 0,
         top: 0,
-        backgroundColor: "#fe9900",
         justifyContent: "center",
         alignItems: "center",
+        padding: spacer.large,
     },
     discountText: {
-        fontSize: 35,
         color: "white",
     },
     stateText: {
         fontSize: 20,
     },
     infoLine: {
-        top: "2%",
+        marginTop: spacer.small,
         flexDirection: "row",
         justifyContent: "space-between",
-        ...spacerStyles.mxmd,
-    },
-    restaurantText: {
-        fontSize: 20,
-        width: "60%",
     },
     buyButton: {
         ...spacerStyles.mxmd,
-        top: 20,
+        marginTop: 20,
         height: 50,
         width: "95%",
         backgroundColor: btnColor,
@@ -248,6 +281,5 @@ const ProductStyles = StyleSheet.create({
     },
     buttonText: {
         color: "white",
-        fontSize: 24,
     },
 })

@@ -1,3 +1,4 @@
+import { textStyles } from "@styles/text"
 import * as React from "react"
 import { Text as DefaultText, View as DefaultView } from "react-native"
 
@@ -40,6 +41,7 @@ export function Text(props: TextProps) {
                 {
                     color,
                     fontFamily: "rubik",
+                    ...textStyles.regular,
                 },
                 style,
             ]}

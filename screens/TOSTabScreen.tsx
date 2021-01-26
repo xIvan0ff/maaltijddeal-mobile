@@ -10,7 +10,9 @@ export const TOSTabScreen: React.FC<ITOSTabScreenProps> = () => {
     return (
         <WebView
             style={styles.webview}
-            source={{ uri: "https://www.maaltijddeal.nl/privacy-statement" }}
+            source={{
+                uri: "https://www.maaltijddeal.nl/privacy-statement?stripped=1",
+            }}
         />
     )
 }

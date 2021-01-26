@@ -1,7 +1,7 @@
 import { Product } from "@components/Product"
 import * as React from "react"
 import { StyleSheet } from "react-native"
-import { Restaurant } from "../types"
+import { Restaurant } from "../typesOld"
 
 import EditScreenInfo from "../components/EditScreenInfo"
 import { Text, View } from "../components/Themed"
