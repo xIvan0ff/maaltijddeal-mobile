@@ -8,6 +8,7 @@ import {
     ImageBackground,
     View,
 } from "react-native"
+import { Filter } from "../types"
 
 const image = require("@assets/images/americanfood.jpeg")
 
@@ -15,11 +16,6 @@ interface IFilterPage {}
 interface IFilterComponent {
     filter: Filter
     onToggle: Function
-}
-type Filter = {
-    name: string
-    img: ImageSourcePropType
-    isToggled: boolean
 }
 
 const americanFilter: Filter = {
@@ -32,9 +28,7 @@ const FilterComponent: React.FC<IFilterComponent> = ({ filter, onToggle }) => {
     return (
         <TouchableOpacity
             style={FilterStyles.container}
-            onPress={() => {
-                onToggle()
-            }}
+            onPress={() => onToggle()}
         >
             <ImageBackground
                 source={filter.img}
