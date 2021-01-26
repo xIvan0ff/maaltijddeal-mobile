@@ -8,6 +8,7 @@ import { spacer, spacerStyles } from "@styles/spacer"
 import { cn } from "@utils/cn"
 import { TouchableOpacity } from "react-native-gesture-handler"
 import { Restaurant } from "../types"
+import { price } from "@utils/price"
 
 const placeholder = require("@assets/images/placeholder.png")
 const colorGradient = require("@assets/images/colorGradient.png")
@@ -15,16 +16,16 @@ const colorGradient = require("@assets/images/colorGradient.png")
 export type ProductState = "open" | "close" | "openInAnHour"
 
 interface IProductProps {
-    id?: number
-    title?: string
+    id: number
+    title: string
     description?: string
-    price?: number
+    price: number
     restaurant: Restaurant
     reviews?: number
     image?: string
     rating?: number
-    oldPrice?: number
-    discount?: number
+    oldPrice: number
+    discount: number
     state: ProductState
 }
 const btnColor = "#1292eb"
@@ -83,16 +84,16 @@ export const Product: React.FC<IProductProps> = (props) => {
                             </Text>
                             <Text style={ProductStyles.deliveryText}>
                                 {props.restaurant.deliveryPrice !== 0
-                                    ? "€" + props.restaurant.deliveryPrice
+                                    ? price(props.restaurant.deliveryPrice)
                                     : ""}
                             </Text>
                         </View>
                         <View style={ProductStyles.priceContainer}>
                             <Text style={ProductStyles.newPrice}>
-                                €{props.price}
+                                {price(props.price)}
                             </Text>
                             <Text style={ProductStyles.oldPrice}>
-                                €{props.oldPrice}
+                                {price(props.oldPrice)}
                             </Text>
                         </View>
                     </View>
