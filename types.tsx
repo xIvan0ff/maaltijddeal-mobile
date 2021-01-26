@@ -1,3 +1,5 @@
+import { ImageSourcePropType } from "react-native"
+
 export type RootStackParamList = {
     Root: undefined
     NotFound: undefined
@@ -91,4 +93,10 @@ export type DealOption = {
     title: string
     description: string
     price: number
+}
+
+export type Filter = {
+    name: string
+    img: ImageSourcePropType
+    isToggled: boolean
 }
