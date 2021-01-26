@@ -3,6 +3,8 @@ import { Ionicons } from "@expo/vector-icons"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import {
     createDrawerNavigator,
+    DrawerContent,
+    DrawerContentScrollView,
     DrawerNavigationProp,
 } from "@react-navigation/drawer"
 import { createStackNavigator } from "@react-navigation/stack"
@@ -32,6 +34,7 @@ import { useColors } from "@hooks/useColors"
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs"
 import { DeliveryScreen } from "@screens/DeliveryScreen"
 import { PickUpScreen } from "@screens/PickUpScreen"
+import { View } from "@components/Themed"
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>()
 
