@@ -3,6 +3,8 @@ import { Ionicons } from "@expo/vector-icons"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import {
     createDrawerNavigator,
+    DrawerContent,
+    DrawerContentScrollView,
     DrawerNavigationProp,
 } from "@react-navigation/drawer"
 import { createStackNavigator } from "@react-navigation/stack"

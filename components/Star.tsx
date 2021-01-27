@@ -1,7 +1,8 @@
 import React from "react"
-import { Image, StyleProp } from "react-native"
+import { Image, StyleProp, StyleSheet } from "react-native"
 import { match } from "@utils/match.ts"
 import { View } from "./Themed"
+import { cn } from "@utils/cn"
 
 const emptyStar = require("@assets/images/emptyStar.png")
 const fullStar = require("@assets/images/fullStar.png")
@@ -27,7 +28,7 @@ const StarObject: React.FC<IStarObjectProps> = ({ starType, imageStyle }) => {
         empty: emptyStar,
         half: halfStar,
     })
-    return <Image style={imageStyle} source={source} />
+    return <Image style={cn(imageStyle, styles.starStyle)} source={source} />
 }
 
 export const Star: React.FC<IStarProps> = ({
@@ -35,37 +36,47 @@ export const Star: React.FC<IStarProps> = ({
     containerStyle,
     imageStyle,
 }) => {
-    /*for (var i = 0; i < Math.floor(rating / 2); i++) {
-        stars.push(<StarObject starType="full" key={i} />);
-    }
-    if (rating % 2 !== 0) {
-        stars.push(<StarObject starType="half" key={++i} />);
-    }
-    for (let i = 0; i < 5; i++) {
-        stars.push(<StarObject starType="empty" key={i} />);
-    }*/
-
     const realRating = Math.floor(rating / 2)
 
     const full = realRating
     const half = rating % 2 ? true : false
     const empty = 5 - realRating - +half
-
+    let keyCount = 0
     return (
         <View style={containerStyle}>
             {range(full).map((i) => (
-                <StarObject imageStyle={imageStyle} starType="full" key={i} />
+                <StarObject
+                    imageStyle={imageStyle}
+                    starType="full"
+                    key={keyCount++}
+                />
             ))}
-            {half && <StarObject imageStyle={imageStyle} starType="half" />}
+            {half && (
+                <StarObject
+                    imageStyle={imageStyle}
+                    starType="half"
+                    key={keyCount++}
+                />
+            )}
             {range(empty).map((i) => (
-                <StarObject imageStyle={imageStyle} starType="empty" key={i} />
+                <StarObject
+                    imageStyle={imageStyle}
+                    starType="empty"
+                    key={keyCount++}
+                />
             ))}
         </View>
     )
 }
 
+const styles = StyleSheet.create({
+    starStyle: {
+        marginHorizontal: 2,
+    },
+})
+
 const range = (n: number) => {
-    const array = []
+    const array: number[] = []
     for (let i = 0; i < n; i++) {
         array.push(i)
     }

@@ -10,6 +10,7 @@ import { Restaurant } from "../typesOld"
 import { textStyles } from "@styles/text"
 import { containerStyles } from "@styles/container"
 import { useColors } from "@hooks/useColors"
+import { price } from "@utils/price"
 
 const placeholder = require("@assets/images/placeholder.png")
 const colorGradient = require("@assets/images/colorGradient.png")
@@ -17,16 +18,16 @@ const colorGradient = require("@assets/images/colorGradient.png")
 export type ProductState = "open" | "close" | "openInAnHour"
 
 interface IProductProps {
-    id?: number
-    title?: string
+    id: number
+    title: string
     description?: string
-    price?: number
+    price: number
     restaurant: Restaurant
     reviews?: number
     image?: string
     rating?: number
-    oldPrice?: number
-    discount?: number
+    oldPrice: number
+    discount: number
     state: ProductState
 
     onPress?: () => void
@@ -110,7 +111,7 @@ export const Product: React.FC<IProductProps> = (props) => {
                                 )}
                             >
                                 {props.restaurant.deliveryPrice !== 0
-                                    ? "€" + props.restaurant.deliveryPrice
+                                    ? price(props.restaurant.deliveryPrice)
                                     : ""}
                             </Text>
                         </View>
@@ -121,10 +122,10 @@ export const Product: React.FC<IProductProps> = (props) => {
                                     textStyles.bold
                                 )}
                             >
-                                €{props.price}
+                                {price(props.price)}
                             </Text>
                             <Text style={ProductStyles.oldPrice}>
-                                €{props.oldPrice}
+                                {price(props.oldPrice)}
                             </Text>
                         </View>
                     </View>

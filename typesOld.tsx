@@ -1,3 +1,5 @@
+import { ImageSourcePropType } from "react-native"
+
 export type RootStackParamList = {
     DrawerTab: undefined
     DealTab: undefined
@@ -51,7 +53,7 @@ export type Restaurant = {
     category: string[]
     workingHours: WorkingHour[]
 
-    deliveryPrice?: number
+    deliveryPrice: number
     freeDeliveryOrderAmount: number
     minimumOrderAmount: number
 
@@ -84,4 +86,17 @@ export type Review = {
     name: string
     dateCreated: string
     visible: boolean
+}
+
+export type DealOption = {
+    id: number
+    title: string
+    description: string
+    price: number
+}
+
+export type Filter = {
+    name: string
+    img: ImageSourcePropType
+    isToggled: boolean
 }

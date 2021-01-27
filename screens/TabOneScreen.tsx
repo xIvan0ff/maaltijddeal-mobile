@@ -6,6 +6,7 @@ import { Restaurant, Review, WorkingHour } from "../typesOld"
 import EditScreenInfo from "../components/EditScreenInfo"
 import { Text, View } from "../components/Themed"
 import { RestaurantReviews } from "@components/RestaurantReviews"
+import { ConfettiPage } from "@components/ConfettiPage"
 
 const reviews: Review[] = [
     {
@@ -112,7 +113,8 @@ export default function TabOneScreen() {
                 rating={7}
                 restaurant={rest}
             /> */}
-            <RestaurantReviews restaurant={rest} />
+            {/* <RestaurantReviews restaurant={rest} /> */}
+            <ConfettiPage />
         </View>
     )
 }
@@ -120,8 +122,6 @@ export default function TabOneScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
     },
     title: {
         fontSize: 20,
