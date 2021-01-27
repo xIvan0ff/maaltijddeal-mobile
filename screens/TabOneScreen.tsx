@@ -94,7 +94,7 @@ const rest: Restaurant = {
     postCode: "postcode",
     rating: 7,
     ratingCount: 8,
-    reviews: [...reviews, ...reviews, ...reviews, ...reviews],
+    reviews: [...reviews],
     takeout: true,
     website: "website",
     workingHours,

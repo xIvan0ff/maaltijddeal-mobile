@@ -24,8 +24,10 @@ import { useColors } from "@hooks/useColors"
 const RootStack = createStackNavigator<RootStackParamList>()
 
 export const RootStackNavigator: React.FC = () => {
+    const colors = useColors()
+
     return (
-        <SafeAreaView style={{ flex: 1 }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: colors.background }}>
             <RootStack.Navigator>
                 <RootStack.Screen
                     name="Drawer"

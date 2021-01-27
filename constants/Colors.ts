@@ -1,3 +1,5 @@
+import { Appearance, ColorSchemeName } from "react-native"
+
 const tintColorLight = "#fe9900"
 const tintColorDark = "#fe9900"
 
@@ -14,6 +16,8 @@ export const colors = {
         textOnPrimary: "#fff",
 
         dim: "#111",
+
+        border: "#ccc",
     },
     dark: {
         text: "#fff",
@@ -27,6 +31,8 @@ export const colors = {
         textOnPrimary: "#fff",
 
         dim: "#111",
+
+        border: "#ccc",
     },
 }
 
