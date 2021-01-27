@@ -1,8 +1,9 @@
-import { View } from "@components/Themed"
 import { StatusBar } from "expo-status-bar"
 import React from "react"
 import { Platform, UIManager } from "react-native"
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context"
+import { Provider } from "react-redux"
+import { store } from "@store/store"
 
 import useCachedResources from "./hooks/useCachedResources"
 import useColorScheme from "./hooks/useColorScheme"
@@ -22,10 +23,12 @@ export default function App() {
         return null
     } else {
         return (
-            <SafeAreaProvider>
-                <Navigation colorScheme={colorScheme} />
-                <StatusBar />
-            </SafeAreaProvider>
+            <Provider store={store}>
+                <SafeAreaProvider>
+                    <Navigation colorScheme={colorScheme} />
+                    <StatusBar />
+                </SafeAreaProvider>
+            </Provider>
         )
     }
 }

@@ -70,13 +70,8 @@ export function View(props: ViewProps) {
 
     const themeStyles = []
 
-    let a = false
-
     if (style instanceof Array) {
         for (const styleItem of style) {
-            if ((styleItem as any).overflow) {
-                a = true
-            }
             if (styleItem) {
                 if (theme === "dark") {
                     themeStyles.push((styleItem as any).dark)
@@ -85,10 +80,6 @@ export function View(props: ViewProps) {
                 }
             }
         }
-    }
-
-    if (a) {
-        console.log([{ backgroundColor }, style, ...themeStyles])
     }
 
     return (

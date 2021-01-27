@@ -51,10 +51,10 @@ export const Product: React.FC<IProductProps> = (props) => {
         ),
         openInAnHour: (
             <View
-                style={{
-                    ...ProductStyles.statusContainer,
-                    backgroundColor: "orange",
-                }}
+                style={[
+                    ProductStyles.statusContainer,
+                    { backgroundColor: "orange" },
+                ]}
             >
                 <Text style={{ ...ProductStyles.stateText, color: "white" }}>
                     Opent over een uur
@@ -73,9 +73,12 @@ export const Product: React.FC<IProductProps> = (props) => {
                     {statusText}
                 </View>
                 <View
-                    style={cn(ProductStyles.discountContainer, {
-                        backgroundColor: colors.primary,
-                    })}
+                    style={[
+                        ProductStyles.discountContainer,
+                        {
+                            backgroundColor: colors.primary,
+                        },
+                    ]}
                 >
                     <Text
                         style={cn(ProductStyles.discountText, textStyles.title)}

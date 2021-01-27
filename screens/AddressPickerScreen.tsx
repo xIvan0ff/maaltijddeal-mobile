@@ -6,22 +6,25 @@ import { StaticMap } from "@components/StaticMap"
 import { Ionicons } from "@expo/vector-icons"
 import { spacerStyles } from "@styles/spacer"
 import { useColors } from "@hooks/useColors"
+import { useSelector } from "react-redux"
+import { RootState } from "@store/rootReducer"
 
 interface IAddressPickerScreenProps {}
 
 export const AddressPickerScreen: React.FC<IAddressPickerScreenProps> = () => {
+    const locationState = useSelector((state: RootState) => state.location)
+
     const colors = useColors()
 
     return (
         <View style={containerStyles.container}>
             <View style={cardStyle}>
-                <StaticMap
-                    center={{
-                        lat: 42.5,
-                        lng: 27.46,
-                    }}
-                    height={200}
-                />
+                {locationState.localAddress && (
+                    <StaticMap
+                        center={locationState.localAddress.position}
+                        height={200}
+                    />
+                )}
                 <View
                     style={[containerStyles.centeredRow, spacerStyles.mymd]}
                     colorName="none"
