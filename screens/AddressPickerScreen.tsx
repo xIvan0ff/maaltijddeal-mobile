@@ -12,22 +12,25 @@ import { useNavigation } from "@react-navigation/native"
 import { TouchableOpacity } from "react-native-gesture-handler"
 
 type AddressPickerScreenNavigationProps = StackNavigationProp<HomeStackParamList>
+import { useSelector } from "react-redux"
+import { RootState } from "@store/rootReducer"
 
 interface IAddressPickerScreenProps {}
 
 export const AddressPickerScreen: React.FC<IAddressPickerScreenProps> = () => {
+    const locationState = useSelector((state: RootState) => state.location)
+
     const colors = useColors()
     const navigation = useNavigation<AddressPickerScreenNavigationProps>()
     return (
         <View style={containerStyles.container}>
             <View style={cardStyle}>
-                <StaticMap
-                    center={{
-                        lat: 42.5,
-                        lng: 27.46,
-                    }}
-                    height={200}
-                />
+                {locationState.localAddress && (
+                    <StaticMap
+                        center={locationState.localAddress.position}
+                        height={200}
+                    />
+                )}
                 <View
                     style={[containerStyles.centeredRow, spacerStyles.mymd]}
                     colorName="none"
