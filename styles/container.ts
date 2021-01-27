@@ -6,7 +6,6 @@ import { utilsStyles } from "./utils"
 
 const cardStyle = style({
     borderRadius: 5,
-    overflow: "hidden",
     backgroundColor: colors.light.background,
     ...elevation(3),
 })

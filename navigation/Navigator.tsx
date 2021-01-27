@@ -20,6 +20,8 @@ import { AddressHeader } from "@components/navigation/AddressHeader"
 import { SafeAreaView } from "react-native-safe-area-context"
 import { CustomHeader } from "@components/navigation/CustomHeader"
 import { useColors } from "@hooks/useColors"
+import { Platform } from "react-native"
+import { MapPickerScreen } from "@screens/MapPickerScreen"
 
 const RootStack = createStackNavigator<RootStackParamList>()
 
@@ -48,7 +50,8 @@ export const DrawerNavigator: React.FC = () => {
 
     return (
         <Drawer.Navigator
-            drawerType="slide"
+            drawerType={Platform.OS === "ios" ? "back" : "slide"}
+            initialRouteName="HomeStack"
             drawerContentOptions={{
                 activeTintColor: colors.primary,
             }}
@@ -119,6 +122,14 @@ export const HomeStackNavigator: React.FC = () => {
                 options={{
                     header: (props) => <CustomHeader {...props} />,
                     headerTitle: "Choose address",
+                }}
+            />
+            <HomeStack.Screen
+                name="MapPicker"
+                component={MapPickerScreen}
+                options={{
+                    header: (props) => <CustomHeader {...props} />,
+                    headerTitle: "Choose your location",
                 }}
             />
         </HomeStack.Navigator>

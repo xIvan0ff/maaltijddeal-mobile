@@ -13,6 +13,7 @@ export type HomeStackParamList = {
     HomeTopTab: undefined
     Deal: undefined
     AddressPicker: undefined
+    MapPicker: undefined
 }
 
 export type HomeTopTabParamList = {
