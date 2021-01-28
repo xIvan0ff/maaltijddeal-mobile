@@ -2,7 +2,7 @@ import { DealOptionItem } from "@components/deal/dealOptionItem"
 import { Ionicons } from "@expo/vector-icons"
 import { useColors } from "@hooks/useColors"
 import { textStyles } from "@styles/text"
-import { DealOption } from "types"
+import { DealOption } from "../typesOld"
 import { cn } from "@utils/cn"
 import * as React from "react"
 import { Dimensions, Image, StyleSheet } from "react-native"
@@ -10,9 +10,11 @@ import { ScrollView } from "react-native-gesture-handler"
 import { SafeAreaView } from "react-native-safe-area-context"
 import { View, Text } from "../components/Themed"
 import { Button } from "@components/Button"
+import { StackNavigationProp } from "@react-navigation/stack"
+import { HomeStackParamList } from "types/navigation"
+import { useNavigation } from "@react-navigation/native"
 
 const logo = require("@assets/images/testfood.jpg")
-const window = Dimensions.get("window")
 
 const testOption: DealOption = {
     id: 122,
@@ -22,7 +24,15 @@ const testOption: DealOption = {
     price: 12.25,
 }
 
+type DealScreenNavigationProp = StackNavigationProp<HomeStackParamList>
+
 export const DealTabScreen: React.FC = () => {
+    const navigation = useNavigation<DealScreenNavigationProp>()
+
+    const onInfoClick = () => {
+        navigation.push("RestaurantTopTab")
+    }
+
     return (
         <View style={styles.container}>
             <ScrollView
@@ -48,11 +58,7 @@ export const DealTabScreen: React.FC = () => {
                             style={styles.dealRestaurantInfoContainer}
                             colorName="primary"
                         >
-                            <Button
-                                onClick={() => {
-                                    console.log(1)
-                                }}
-                            >
+                            <Button onClick={onInfoClick}>
                                 <Ionicons
                                     name="ios-information-circle"
                                     size={38}

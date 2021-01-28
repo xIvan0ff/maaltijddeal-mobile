@@ -37,12 +37,28 @@ export type TextProps = ThemeProps & DefaultText["props"]
 export type ViewProps = ThemeProps & DefaultView["props"]
 
 export function Text(props: TextProps) {
+    const theme = useColorScheme()
+
     const { style, lightColor, darkColor, colorName, ...otherProps } = props
 
     const color = useThemeColor(
         { light: lightColor, dark: darkColor },
         colorName ?? "text"
     )
+
+    const themeStyles = []
+
+    if (style instanceof Array) {
+        for (const styleItem of style) {
+            if (styleItem) {
+                if (theme === "dark") {
+                    themeStyles.push((styleItem as any).dark)
+                } else {
+                    themeStyles.push((styleItem as any).light)
+                }
+            }
+        }
+    }
 
     return (
         <DefaultText
@@ -53,6 +69,7 @@ export function Text(props: TextProps) {
                     ...textStyles.regular,
                 },
                 style,
+                ...themeStyles,
             ]}
             {...otherProps}
         />
@@ -78,6 +95,14 @@ export function View(props: ViewProps) {
                 } else {
                     themeStyles.push((styleItem as any).light)
                 }
+            }
+        }
+    } else {
+        if (style) {
+            if (theme === "dark") {
+                themeStyles.push((style as any).dark)
+            } else {
+                themeStyles.push((style as any).light)
             }
         }
     }

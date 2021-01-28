@@ -1,4 +1,4 @@
-import { RestaurantInfo } from "@components/RestaurantInfo"
+import { RestaurantInfo } from "@screens/RestaurantInfoScreen"
 import { Restaurant } from "../typesOld"
 import { WorkingHour } from "../typesOld"
 import { Review } from "../typesOld"

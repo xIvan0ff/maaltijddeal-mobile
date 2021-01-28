@@ -1,5 +1,5 @@
 import React from "react"
-import { WorkingHour } from "../types"
+import { WorkingHour } from "../typesOld"
 import { View, Text } from "./Themed"
 import { StyleSheet } from "react-native"
 
@@ -34,8 +34,8 @@ export const WorkDay: React.FC<IWorkDay> = ({ workingHour }) => {
     }
     return (
         <View style={WorkDayStyle.container}>
-            <Text style={WorkDayStyle.workDayText}>{workDayName}</Text>
-            <Text style={WorkDayStyle.hourText}>
+            <Text>{workDayName}</Text>
+            <Text>
                 {workingHour.closedAllDay
                     ? "Closed all day"
                     : workingHour.openTime + " - " + workingHour.closeTime}
@@ -49,11 +49,5 @@ const WorkDayStyle = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
-    },
-    workDayText: {
-        fontSize: 16,
-    },
-    hourText: {
-        fontSize: 20,
     },
 })

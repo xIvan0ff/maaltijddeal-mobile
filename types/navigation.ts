@@ -13,6 +13,7 @@ export type HomeStackParamList = {
     HomeTopTab: undefined
     Deal: undefined
     AddressPicker: undefined
+    RestaurantTopTab: undefined
 }
 
 export type HomeTopTabParamList = {
@@ -26,4 +27,9 @@ export type TestOneParamList = {
 
 export type TestTwoParamList = {
     TestTwo: undefined
+}
+
+export type RestaurantTopTabParamList = {
+    Info: undefined
+    Reviews: undefined
 }

@@ -18,6 +18,11 @@ export const containerStyles = createStyles({
         paddingTop: spacer.small,
         alignItems: "center",
     },
+    notCenteredContainer: {
+        flex: 1,
+        paddingHorizontal: spacer.medium,
+        paddingTop: spacer.small,
+    },
     row: {
         flexDirection: "row",
     },

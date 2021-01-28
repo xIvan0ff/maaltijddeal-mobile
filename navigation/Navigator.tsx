@@ -12,6 +12,7 @@ import { TOSTabScreen } from "@screens/TOSTabScreen"
 import {
     DrawerParamList,
     HomeStackParamList,
+    RestaurantTopTabParamList,
     RootStackParamList,
 } from "types/navigation"
 import { HomeTopTabParamList } from "typesOld"
@@ -20,6 +21,8 @@ import { AddressHeader } from "@components/navigation/AddressHeader"
 import { SafeAreaView } from "react-native-safe-area-context"
 import { CustomHeader } from "@components/navigation/CustomHeader"
 import { useColors } from "@hooks/useColors"
+import { RestaurantInfoScreen } from "@screens/RestaurantInfoScreen"
+import { RestaurantReviewsScreen } from "@screens/RestaurantReviewsScreen"
 
 const RootStack = createStackNavigator<RootStackParamList>()
 
@@ -121,6 +124,14 @@ export const HomeStackNavigator: React.FC = () => {
                     headerTitle: "Choose address",
                 }}
             />
+            <HomeStack.Screen
+                name="RestaurantTopTab"
+                component={RestaurantTopTabNavigator}
+                options={{
+                    header: (props) => <CustomHeader {...props} />,
+                    headerTitle: "Restaurant",
+                }}
+            />
         </HomeStack.Navigator>
     )
 }
@@ -142,5 +153,31 @@ export const HomeTopTabNavigator: React.FC = () => {
             <HomeTopTab.Screen name="Delivery" component={DeliveryScreen} />
             <HomeTopTab.Screen name="PickUp" component={PickUpScreen} />
         </HomeTopTab.Navigator>
+    )
+}
+
+const RestaurantTopTab = createMaterialTopTabNavigator<RestaurantTopTabParamList>()
+
+export const RestaurantTopTabNavigator: React.FC = () => {
+    const colors = useColors()
+
+    return (
+        <RestaurantTopTab.Navigator
+            tabBarOptions={{
+                activeTintColor: colors.primary,
+                indicatorStyle: {
+                    backgroundColor: colors.primary,
+                },
+            }}
+        >
+            <RestaurantTopTab.Screen
+                name="Info"
+                component={RestaurantInfoScreen}
+            />
+            <RestaurantTopTab.Screen
+                name="Reviews"
+                component={RestaurantReviewsScreen}
+            />
+        </RestaurantTopTab.Navigator>
     )
 }

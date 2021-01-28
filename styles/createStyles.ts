@@ -7,10 +7,14 @@ type ThemedNamedStyles<T> = {
     }
 }
 
+type ChangeType<Of, To> = {
+    [K in keyof Of]: To
+}
+
 export function createStyles<T>(
     styles: ThemedNamedStyles<T> | ThemedNamedStyles<any>
-): ThemedNamedStyles<T> {
-    return styles
+): ChangeType<T, any> {
+    return (styles as any) as ChangeType<T, any>
 }
 
 export function style(
