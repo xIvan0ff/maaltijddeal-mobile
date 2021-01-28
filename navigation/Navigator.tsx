@@ -23,6 +23,8 @@ import { CustomHeader } from "@components/navigation/CustomHeader"
 import { useColors } from "@hooks/useColors"
 import { RestaurantInfoScreen } from "@screens/RestaurantInfoScreen"
 import { RestaurantReviewsScreen } from "@screens/RestaurantReviewsScreen"
+import { Platform } from "react-native"
+import { MapPickerScreen } from "@screens/MapPickerScreen"
 
 const RootStack = createStackNavigator<RootStackParamList>()
 
@@ -51,7 +53,8 @@ export const DrawerNavigator: React.FC = () => {
 
     return (
         <Drawer.Navigator
-            drawerType="slide"
+            drawerType={Platform.OS === "ios" ? "back" : "slide"}
+            initialRouteName="HomeStack"
             drawerContentOptions={{
                 activeTintColor: colors.primary,
             }}
@@ -130,6 +133,14 @@ export const HomeStackNavigator: React.FC = () => {
                 options={{
                     header: (props) => <CustomHeader {...props} />,
                     headerTitle: "Restaurant",
+                }}
+            />
+            <HomeStack.Screen
+                name="MapPicker"
+                component={MapPickerScreen}
+                options={{
+                    header: (props) => <CustomHeader {...props} />,
+                    headerTitle: "Choose your location",
                 }}
             />
         </HomeStack.Navigator>

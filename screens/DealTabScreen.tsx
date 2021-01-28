@@ -21,7 +21,7 @@ const testOption: DealOption = {
     title: "az",
     description:
         "Sum sum sum beeeeSum sum sum beeeeSum sum sum beeeeSum sum sum beeeeSum sum sum beeeeSum sum sum beeee",
-    price: 12.25,
+    price: Math.random(),
 }
 
 type DealScreenNavigationProp = StackNavigationProp<HomeStackParamList>

@@ -6,6 +6,12 @@ import { StaticMap } from "@components/StaticMap"
 import { Ionicons } from "@expo/vector-icons"
 import { spacerStyles } from "@styles/spacer"
 import { useColors } from "@hooks/useColors"
+import { StackNavigationProp } from "@react-navigation/stack"
+import { HomeStackParamList } from "types/navigation"
+import { useNavigation } from "@react-navigation/native"
+import { TouchableOpacity } from "react-native-gesture-handler"
+
+type AddressPickerScreenNavigationProps = StackNavigationProp<HomeStackParamList>
 import { useSelector } from "react-redux"
 import { RootState } from "@store/rootReducer"
 
@@ -15,7 +21,7 @@ export const AddressPickerScreen: React.FC<IAddressPickerScreenProps> = () => {
     const locationState = useSelector((state: RootState) => state.location)
 
     const colors = useColors()
-
+    const navigation = useNavigation<AddressPickerScreenNavigationProps>()
     return (
         <View style={containerStyles.container}>
             <View style={cardStyle}>
@@ -35,23 +41,29 @@ export const AddressPickerScreen: React.FC<IAddressPickerScreenProps> = () => {
                         size={24}
                         color={colors.primary}
                     />
-                    <Text>Use my current address</Text>
+                    <Text>Use my current location</Text>
                 </View>
             </View>
 
             <View style={cardStyle}>
-                <View
-                    style={[containerStyles.centeredRow, spacerStyles.mymd]}
-                    colorName="none"
+                <TouchableOpacity
+                    onPress={() => {
+                        navigation.push("MapPicker")
+                    }}
                 >
-                    <Ionicons
-                        style={spacerStyles.mxmd}
-                        name="map"
-                        size={24}
-                        color={colors.primary}
-                    />
-                    <Text>Choose on map</Text>
-                </View>
+                    <View
+                        style={[containerStyles.centeredRow, spacerStyles.mymd]}
+                        colorName="none"
+                    >
+                        <Ionicons
+                            style={spacerStyles.mxmd}
+                            name="map"
+                            size={24}
+                            color={colors.primary}
+                        />
+                        <Text>Choose on map</Text>
+                    </View>
+                </TouchableOpacity>
             </View>
         </View>
     )

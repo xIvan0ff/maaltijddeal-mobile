@@ -14,6 +14,7 @@ export type HomeStackParamList = {
     Deal: undefined
     AddressPicker: undefined
     RestaurantTopTab: undefined
+    MapPicker: undefined
 }
 
 export type HomeTopTabParamList = {
