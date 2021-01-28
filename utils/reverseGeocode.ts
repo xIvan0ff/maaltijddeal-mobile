@@ -1,6 +1,9 @@
 import { googleMapsApiKey } from "@config/keys"
 
-export const reverseGeocode = async (lat: number, lng: number) => {
+export const reverseGeocode = async (
+    lat: number,
+    lng: number
+): Promise<string | null> => {
     const response = await fetch(
         "https://maps.googleapis.com/maps/api/geocode/json?address=" +
             lat +
@@ -10,5 +13,7 @@ export const reverseGeocode = async (lat: number, lng: number) => {
             googleMapsApiKey
     )
     const responseJson = await response.json()
-    return responseJson.results[0].formatted_address
+    return responseJson.results.length > 0
+        ? responseJson.results[0].formatted_address
+        : null
 }
