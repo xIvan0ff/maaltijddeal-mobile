@@ -6,7 +6,7 @@ import * as Location from "expo-location"
 
 import { mergeMap, switchMap } from "rxjs/operators"
 import { reverseGeocode } from "@utils/reverseGeocode"
-import { actions } from "@store/store"
+import { actions } from "@store/root"
 import { getIPLocation } from "@utils/ipLocation"
 
 type LocationEpic = Epic<LocationActionTypes, LocationActionTypes, RootState>

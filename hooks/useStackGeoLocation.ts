@@ -4,7 +4,7 @@ import { useEffect } from "react"
 import * as Permissions from "expo-permissions"
 import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "@store/root"
-import { actions } from "@store/store"
+import { actions } from "@store/root"
 
 export const useStackGeoLocation = (navigation: any) => {
     const [permission, askPermission] = usePermissions(Permissions.LOCATION)

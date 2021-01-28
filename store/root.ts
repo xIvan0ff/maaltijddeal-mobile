@@ -1,6 +1,5 @@
 import { combineReducers } from "redux"
-import { combineEpics } from "redux-observable"
-import { setLocalAddressEpic } from "./location/epics"
+import { locationActions } from "./location/actions"
 import { locationReducer } from "./location/reducer"
 
 export const rootReducer = combineReducers({
@@ -9,4 +8,6 @@ export const rootReducer = combineReducers({
 
 export type RootState = ReturnType<typeof rootReducer>
 
-export const rootEpics = combineEpics(setLocalAddressEpic)
+export const actions = {
+    location: locationActions,
+}

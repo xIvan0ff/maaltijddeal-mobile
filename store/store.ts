@@ -1,9 +1,12 @@
-import { createEpicMiddleware } from "redux-observable"
+import { combineEpics, createEpicMiddleware } from "redux-observable"
 import { createStore, applyMiddleware } from "redux"
-import { rootEpics, rootReducer, RootState } from "./root"
-import { locationActions, LocationActionTypes } from "./location/actions"
+import { rootReducer, RootState } from "./root"
+import { LocationActionTypes } from "./location/actions"
+import { locationEpics } from "./location"
 
 // type Actions
+
+export const rootEpics = combineEpics(locationEpics)
 
 const epicMiddleware = createEpicMiddleware<
     LocationActionTypes,
@@ -14,7 +17,3 @@ const epicMiddleware = createEpicMiddleware<
 export const store = createStore(rootReducer, applyMiddleware(epicMiddleware))
 
 epicMiddleware.run(rootEpics)
-
-export const actions = {
-    location: locationActions,
-}

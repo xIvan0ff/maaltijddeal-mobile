@@ -16,7 +16,7 @@ import { RootState } from "@store/root"
 import { usePermissions } from "expo-permissions"
 
 import * as Permissions from "expo-permissions"
-import { actions } from "@store/store"
+import { actions } from "@store/root"
 
 import * as Location from "expo-location"
 import { reverseGeocode } from "@utils/reverseGeocode"

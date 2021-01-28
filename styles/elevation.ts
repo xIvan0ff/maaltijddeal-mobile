@@ -25,7 +25,7 @@ export const elevation = (amount: number) => {
     )
 
     const shadowHeight = amount === 1 ? 1 : Math.floor(amount / 2)
-    console.log(amount)
+
     return {
         dark: {
             backgroundColor: color,
