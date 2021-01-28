@@ -6,5 +6,5 @@ export type LatLng = {
 export interface Address {
     address: string
     position: LatLng
-    postCode: number
+    postCode: string
 }

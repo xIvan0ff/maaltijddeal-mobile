@@ -18,7 +18,7 @@ import { DrawerNavigationProp } from "@react-navigation/drawer/lib/typescript/sr
 
 import { HomeStackParamList } from "types/navigation"
 import { useDispatch, useSelector } from "react-redux"
-import { RootState } from "@store/rootReducer"
+import { RootState } from "@store/root"
 import { actions } from "@store/store"
 
 type AddressHeaderNavigationProp = CompositeNavigationProp<

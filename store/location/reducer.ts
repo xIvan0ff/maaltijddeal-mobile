@@ -2,6 +2,7 @@ import {
     CHOOSE_ADDRESS,
     LocationActionTypes,
     SET_LOCAL_ADDRESS,
+    SET_LOCAL_ADDRESS_SUCCESS,
     USE_LOCAL_ADDRESS,
 } from "./actions"
 import { LocationState } from "./types"
@@ -13,7 +14,7 @@ const initialLocationState: LocationState = {
             lat: 42.5,
             lng: 27.46,
         },
-        postCode: 8000,
+        postCode: "8000",
     },
 }
 
@@ -27,7 +28,7 @@ export function locationReducer(
                 ...state,
                 selectedAddress: action.payload,
             }
-        case SET_LOCAL_ADDRESS:
+        case SET_LOCAL_ADDRESS_SUCCESS:
             return {
                 ...state,
                 localAddress: action.payload,

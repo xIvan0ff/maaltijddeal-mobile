@@ -3,27 +3,20 @@ import publicIP from "react-native-public-ip"
 import axios from "axios"
 
 const serviceProvider = "http://ip-api.com/json/"
-export const getIPLocation = async (): Promise<LatLng | null> => {
-    try {
-        const ip = await publicIP()
-        if (ip) {
-            try {
-                const request = await axios.get(`${serviceProvider}${ip}`)
-
-                if (request) {
-                    try {
-                        return { lat: request.data.lat, lng: request.data.lon }
-                    } catch {
-                        return null
-                    }
-                }
-                return null
-            } catch {
-                return null
+export const getIPLocation = async (): Promise<LatLng> => {
+    return publicIP()
+        .then((ip) => {
+            if (ip) {
+                return axios.get(`${serviceProvider}${ip}`)
             }
-        }
-        return null
-    } catch {
-        return null
-    }
+
+            throw new Error("No IP")
+        })
+        .then((response) => {
+            if (response) {
+                return { lat: response.data.lat, lng: response.data.lon }
+            }
+
+            throw new Error("No response from position provider")
+        })
 }

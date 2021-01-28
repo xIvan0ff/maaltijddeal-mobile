@@ -14,6 +14,8 @@ import { Picker } from "@react-native-picker/picker"
 import { RadioButton } from "react-native-paper"
 import { price } from "@utils/price"
 import { spacerStyles } from "@styles/spacer"
+import { elevation } from "@styles/elevation"
+import { createStyles } from "@styles/createStyles"
 
 const image = require("@assets/images/americanfood.jpeg")
 
@@ -252,7 +254,7 @@ export const FilterPage: React.FC<IFilterPage> = (props) => {
                                                   isToggled: !currFilter.isToggled,
                                               }
                                             : currFilter
-                                    }),
+                                    })
                                 )
                             }}
                         />
@@ -308,7 +310,7 @@ export const FilterPage: React.FC<IFilterPage> = (props) => {
     )
 }
 
-const FilterPageStyles = StyleSheet.create({
+const FilterPageStyles = createStyles({
     container: {
         flex: 1,
     },

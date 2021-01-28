@@ -1,7 +1,11 @@
 import { Address } from "types/location"
 
 export const CHOOSE_ADDRESS = "CHOOSE_ADDRESS"
+
 export const SET_LOCAL_ADDRESS = "SET_LOCAL_ADDRESS"
+export const SET_LOCAL_ADDRESS_SUCCESS = "SET_LOCAL_ADDRESS_SUCCESS"
+export const SET_LOCAL_ADDRESS_FAILED = "SET_LOCAL_ADDRESS_FAILED"
+
 export const USE_LOCAL_ADDRESS = "USE_LOCAL_ADDRESS"
 
 interface ChooseAddressAction {
@@ -9,9 +13,17 @@ interface ChooseAddressAction {
     payload: Address
 }
 
+interface SetLocalAddressActionSuccess {
+    type: typeof SET_LOCAL_ADDRESS_SUCCESS
+    payload: Address
+}
+
+interface SetLocalAddressActionFailed {
+    type: typeof SET_LOCAL_ADDRESS_FAILED
+}
+
 interface SetLocalAddressAction {
     type: typeof SET_LOCAL_ADDRESS
-    payload: Address
 }
 
 interface UseLocalAddressAction {
@@ -20,8 +32,10 @@ interface UseLocalAddressAction {
 
 export type LocationActionTypes =
     | ChooseAddressAction
-    | SetLocalAddressAction
     | UseLocalAddressAction
+    | SetLocalAddressAction
+    | SetLocalAddressActionSuccess
+    | SetLocalAddressActionFailed
 
 export const locationActions = {
     chooseAddress(address: Address): LocationActionTypes {
@@ -30,10 +44,21 @@ export const locationActions = {
             payload: address,
         }
     },
-    setLocalAddress(address: Address): LocationActionTypes {
+
+    setLocalAddress(): LocationActionTypes {
         return {
             type: "SET_LOCAL_ADDRESS",
+        }
+    },
+    setLocalAddressSuccess(address: Address): LocationActionTypes {
+        return {
+            type: "SET_LOCAL_ADDRESS_SUCCESS",
             payload: address,
+        }
+    },
+    setLocalAddressFailed(): LocationActionTypes {
+        return {
+            type: "SET_LOCAL_ADDRESS_FAILED",
         }
     },
     useLocalAddress(): LocationActionTypes {
