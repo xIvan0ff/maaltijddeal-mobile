@@ -6,6 +6,7 @@ import { Restaurant, Review, WorkingHour } from "../typesOld"
 import EditScreenInfo from "../components/EditScreenInfo"
 import { Text, View } from "../components/Themed"
 import { ConfettiPage } from "@components/ConfettiPage"
+import { CartPage } from "@components/CartPage"
 
 export default function TabOneScreen() {
     return (
@@ -21,7 +22,8 @@ export default function TabOneScreen() {
                 restaurant={rest}
             /> */}
             {/* <RestaurantReviews restaurant={rest} /> */}
-            <ConfettiPage />
+            {/* <ConfettiPage /> */}
+            <CartPage />
         </View>
     )
 }

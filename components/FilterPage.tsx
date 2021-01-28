@@ -74,7 +74,7 @@ const FilterComponent: React.FC<IFilterComponent> = ({ filter, onToggle }) => {
                     }),
                     height: heightValue.interpolate({
                         inputRange: [0, 100],
-                        outputRange: [defaultHeight, defaultHeight * 2],
+                        outputRange: [defaultHeight, defaultHeight * 1.5],
                     }),
                     flexDirection: "row",
                     overflow: "hidden",
@@ -196,7 +196,11 @@ export const FilterPage: React.FC<IFilterPage> = (props) => {
                 >
                     <TouchableOpacity
                         style={FilterPageStyles.priceButton}
-                        onPress={() => setSelectedPriceRange(10)}
+                        onPress={() =>
+                            selectedPriceRange !== 10
+                                ? setSelectedPriceRange(10)
+                                : setSelectedPriceRange(-1)
+                        }
                     >
                         <Text style={FilterPageStyles.priceButtonText}>
                             {"<"}
@@ -213,7 +217,11 @@ export const FilterPage: React.FC<IFilterPage> = (props) => {
                 >
                     <TouchableOpacity
                         style={FilterPageStyles.priceButton}
-                        onPress={() => setSelectedPriceRange(20)}
+                        onPress={() =>
+                            selectedPriceRange !== 20
+                                ? setSelectedPriceRange(20)
+                                : setSelectedPriceRange(-1)
+                        }
                     >
                         <Text style={FilterPageStyles.priceButtonText}>
                             {"<"}
@@ -230,7 +238,11 @@ export const FilterPage: React.FC<IFilterPage> = (props) => {
                 >
                     <TouchableOpacity
                         style={FilterPageStyles.priceButton}
-                        onPress={() => setSelectedPriceRange(30)}
+                        onPress={() =>
+                            selectedPriceRange !== 30
+                                ? setSelectedPriceRange(30)
+                                : setSelectedPriceRange(-1)
+                        }
                     >
                         <Text style={FilterPageStyles.priceButtonText}>
                             {"<"}
@@ -315,9 +327,11 @@ const FilterPageStyles = createStyles({
         flex: 1,
     },
     priceButtonContainer: {
-        flex: 1,
-        ...elevation(4),
+        width: "30%",
+        height: "100%",
+        elevation: 4,
         borderRadius: 100,
+        backgroundColor: "white",
     },
     priceButton: {
         height: "100%",
@@ -326,7 +340,7 @@ const FilterPageStyles = createStyles({
         justifyContent: "center",
     },
     priceButtonText: {
-        fontSize: 30,
+        fontSize: 20,
         color: "black",
     },
     filtersContainer: {

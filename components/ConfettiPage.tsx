@@ -11,34 +11,9 @@ import {
 import { spacerStyles } from "@styles/spacer"
 import { price } from "@utils/price"
 import ConfettiCannon from "react-native-confetti-cannon"
+import { TextLine } from "./TextLine"
 
 interface IConfettiPage {}
-interface ITextLine {
-    leftText: string
-    rightText: string
-    textStyle: StyleProp<TextStyle>
-    containerStyle: any
-}
-
-const TextLine: React.FC<ITextLine> = ({
-    leftText,
-    rightText,
-    textStyle,
-    containerStyle,
-}) => {
-    return (
-        <View
-            style={{
-                ...containerStyle,
-                justifyContent: "space-between",
-                flexDirection: "row",
-            }}
-        >
-            <Text style={textStyle}>{leftText}</Text>
-            <Text style={textStyle}>{rightText}</Text>
-        </View>
-    )
-}
 
 export const ConfettiPage: React.FC<IConfettiPage> = (props) => {
     let ref: NonNullable<any>

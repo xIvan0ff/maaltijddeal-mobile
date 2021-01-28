@@ -6,13 +6,15 @@ import { DealOption } from "../typesOld"
 import { cn } from "@utils/cn"
 import * as React from "react"
 import { Dimensions, Image, StyleSheet } from "react-native"
-import { ScrollView } from "react-native-gesture-handler"
+import { ScrollView, TouchableOpacity } from "react-native-gesture-handler"
 import { SafeAreaView } from "react-native-safe-area-context"
 import { View, Text } from "../components/Themed"
 import { Button } from "@components/Button"
 import { StackNavigationProp } from "@react-navigation/stack"
 import { HomeStackParamList } from "types/navigation"
 import { useNavigation } from "@react-navigation/native"
+import { spacerStyles } from "@styles/spacer"
+import { useState } from "react"
 
 const logo = require("@assets/images/testfood.jpg")
 
@@ -32,6 +34,8 @@ export const DealTabScreen: React.FC = () => {
     const onInfoClick = () => {
         navigation.push("RestaurantTopTab")
     }
+
+    const [value, setValue] = useState(1)
 
     return (
         <View style={styles.container}>
@@ -106,6 +110,67 @@ export const DealTabScreen: React.FC = () => {
                     </View>
                 </View>
             </ScrollView>
+            <View style={styles.bottomLine}>
+                <View style={styles.addRemoveContainer}>
+                    <TouchableOpacity
+                        style={{
+                            height: "auto",
+                            justifyContent: "center",
+                        }}
+                        onPress={() => {
+                            setValue(value + 1)
+                        }}
+                    >
+                        <View
+                            style={styles.addremoveButton}
+                            colorName="primary"
+                        >
+                            <Text style={styles.addremoveText}>+</Text>
+                        </View>
+                    </TouchableOpacity>
+
+                    <Text style={styles.counterText}>{value}</Text>
+
+                    <TouchableOpacity
+                        style={{
+                            height: "auto",
+                            justifyContent: "center",
+                        }}
+                        onPress={() => {
+                            setValue(value - 1 < 1 ? 1 : value - 1)
+                        }}
+                    >
+                        <View
+                            style={styles.addremoveButton}
+                            colorName="primary"
+                        >
+                            <Text style={styles.addremoveText}>-</Text>
+                        </View>
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.addContainer}>
+                    <View
+                        style={{
+                            borderRadius: 10,
+                            elevation: 4,
+                            paddingHorizontal: 10,
+                        }}
+                        colorName="secondary"
+                    >
+                        <TouchableOpacity
+                            onPress={() => {}}
+                            style={{
+                                height: "100%",
+                                width: "100%",
+                                alignItems: "center",
+                                justifyContent: "center",
+                            }}
+                        >
+                            <Text>Add to shopping cart</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </View>
         </View>
     )
 }
@@ -155,5 +220,40 @@ const styles = StyleSheet.create({
     },
     dealPrice: { fontSize: 18 },
     dealOptionsContainer: { marginTop: 20 },
+    bottomLine: {
+        width: "100%",
+        height: 80,
+        elevation: 10,
+        flexDirection: "row",
+        ...spacerStyles.pxmd,
+        alignItems: "center",
+        paddingBottom: 5,
+    },
+    addRemoveContainer: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
+        width: "30%",
+        marginLeft: 20,
+    },
+    addremoveButton: {
+        borderRadius: 100,
+        height: 40,
+        width: 40,
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    addremoveText: {
+        fontSize: 30,
+    },
+    addContainer: {
+        height: 40,
+        width: "80%",
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    counterText: {
+        marginHorizontal: 10,
+    },
     dealOptions: {},
 })
