@@ -7,6 +7,7 @@ import EditScreenInfo from "../components/EditScreenInfo"
 import { Text, View } from "../components/Themed"
 import { RestaurantReviews } from "@components/RestaurantReviews"
 import { ConfettiPage } from "@components/ConfettiPage"
+import { CartPage } from "@components/CartPage"
 
 const reviews: Review[] = [
     {
@@ -114,7 +115,8 @@ export default function TabOneScreen() {
                 restaurant={rest}
             /> */}
             {/* <RestaurantReviews restaurant={rest} /> */}
-            <ConfettiPage />
+            {/* <ConfettiPage /> */}
+            <CartPage />
         </View>
     )
 }
