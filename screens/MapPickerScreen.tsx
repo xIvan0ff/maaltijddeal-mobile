@@ -19,6 +19,11 @@ import {
 } from "react-native-google-places-autocomplete"
 import { googleMapsApiKey } from "@config/keys"
 import { reverseGeocode } from "@utils/reverseGeocode"
+import { Button } from "@components/Button"
+import { MaterialIcons } from "@expo/vector-icons"
+import { elevation } from "@styles/elevation"
+import { createStyles, style } from "@styles/createStyles"
+import { useColors } from "@hooks/useColors"
 
 type MapPickerScreenNavigationProps = StackNavigationProp<HomeStackParamList>
 interface IMapPickerScreenProps {}
@@ -34,10 +39,29 @@ export const MapPickerScreen: React.FC<IMapPickerScreenProps> = () => {
         ask: true,
     })
 
+    const colors = useColors()
+
+    const animateMove = (location: LatLng) => {
+        map.current?.animateCamera({
+            center: {
+                latitude: location.lat,
+                longitude: location.lng,
+            },
+            zoom: 17,
+        })
+    }
+
     useEffect(() => {
         ;(async () => {
             const { status } = await Location.requestPermissionsAsync()
             if (status !== "granted") {
+                const location = await getIPLocation()
+                if (location !== null) {
+                    setState({
+                        ...state,
+                        location,
+                    })
+                }
                 return
             }
 
@@ -73,20 +97,19 @@ export const MapPickerScreen: React.FC<IMapPickerScreenProps> = () => {
     }, [state.location])
     return (
         <View style={containerStyles.container}>
-            <View style={{ flex: 1, zIndex: 9999 }}>
+            <View style={{ flex: 1, zIndex: 1 }}>
                 <GooglePlacesAutocomplete
                     placeholder="Search"
                     ref={autocomplete}
                     onPress={(data, details = null) => {
                         if (details) {
-                            map.current?.animateCamera({
-                                center: {
-                                    latitude: details?.geometry.location.lat,
-                                    longitude: details?.geometry.location.lng,
-                                },
+                            animateMove({
+                                lat: details?.geometry.location.lat,
+                                lng: details?.geometry.location.lng,
                             })
                         }
                     }}
+                    currentLocation={true}
                     fetchDetails={true}
                     query={{ key: googleMapsApiKey, language: "en" }}
                     styles={{
@@ -113,21 +136,46 @@ export const MapPickerScreen: React.FC<IMapPickerScreenProps> = () => {
                                 region.latitude,
                                 region.longitude
                             )
-
-                            autocomplete.current?.setAddressText(
-                                reversedAddress
-                            )
+                            if (reversedAddress !== null) {
+                                autocomplete.current?.setAddressText(
+                                    reversedAddress
+                                )
+                            }
                         })()
                     }}
                 >
                     <Image source={pointer} style={styles.pointer} />
                 </MapView>
+                <View style={styles.locationButton}>
+                    <Button
+                        onClick={() => {
+                            if (state.location) {
+                                animateMove(state.location)
+                            }
+                        }}
+                    >
+                        <MaterialIcons
+                            name="my-location"
+                            size={44}
+                            color={colors.tint}
+                        />
+                    </Button>
+                </View>
             </View>
         </View>
     )
 }
 
-const styles = StyleSheet.create({
+const locationButton = style({
+    ...elevation(5),
+    zIndex: 5,
+    position: "absolute",
+    bottom: "5%",
+    right: "5%",
+    borderRadius: 10,
+})
+
+const styles = createStyles({
     map: {
         width: Dimensions.get("screen").width,
         height: "100%",
@@ -141,8 +189,8 @@ const styles = StyleSheet.create({
         width: 35,
     },
     search: {
-        zIndex: 9999,
         marginTop: 5,
         width: "95%",
     },
+    locationButton,
 })
