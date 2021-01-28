@@ -1,9 +1,16 @@
 import { textStyles } from "@styles/text"
 import React from "react"
 import { View, Text } from "./Themed"
-import { StyleProp, StyleSheet, TextStyle, ViewStyle } from "react-native"
+import {
+    StyleProp,
+    StyleSheet,
+    TextStyle,
+    TouchableOpacity,
+    ViewStyle,
+} from "react-native"
 import { spacerStyles } from "@styles/spacer"
 import { price } from "@utils/price"
+import ConfettiCannon from "react-native-confetti-cannon"
 
 interface IConfettiPage {}
 interface ITextLine {
@@ -34,8 +41,37 @@ const TextLine: React.FC<ITextLine> = ({
 }
 
 export const ConfettiPage: React.FC<IConfettiPage> = (props) => {
+    let ref: NonNullable<any>
     return (
         <View style={ConfettiStyles.container}>
+            <View
+                style={{
+                    position: "absolute",
+                    height: "100%",
+                    width: "100%",
+                    flex: 1,
+                    backgroundColor: "rgba(0,0,0,0)",
+                    zIndex: 998,
+                }}
+            >
+                <ConfettiCannon
+                    count={200}
+                    origin={{ x: -10, y: 0 }}
+                    autoStart={true}
+                    autoStartDelay={10}
+                    ref={(_ref) => (ref = _ref)}
+                />
+            </View>
+            <View style={{ height: 30, width: 30, backgroundColor: "red" }}>
+                <TouchableOpacity
+                    style={{ height: 30, width: 30, backgroundColor: "green" }}
+                    onPress={() => {
+                        ref.start()
+                        console.log("log")
+                    }}
+                />
+            </View>
+
             <Text style={textStyles.title}>Je habt het volgende besteld</Text>
             <View style={ConfettiStyles.orderBox}>
                 <TextLine
@@ -88,6 +124,7 @@ export const ConfettiPage: React.FC<IConfettiPage> = (props) => {
 
 const ConfettiStyles = StyleSheet.create({
     container: {
+        height: "100%",
         marginTop: 20,
         alignItems: "center",
         ...spacerStyles.pxmd,
