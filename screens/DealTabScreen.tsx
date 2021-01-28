@@ -2,7 +2,7 @@ import { DealOptionItem } from "@components/deal/dealOptionItem"
 import { Ionicons } from "@expo/vector-icons"
 import { useColors } from "@hooks/useColors"
 import { textStyles } from "@styles/text"
-import { DealOption } from "types"
+import { DealOption } from "../typesOld"
 import { cn } from "@utils/cn"
 import * as React from "react"
 import { Dimensions, Image, StyleSheet } from "react-native"
@@ -19,7 +19,7 @@ const testOption: DealOption = {
     title: "az",
     description:
         "Sum sum sum beeeeSum sum sum beeeeSum sum sum beeeeSum sum sum beeeeSum sum sum beeeeSum sum sum beeee",
-    price: 12.25,
+    price: Math.random(),
 }
 
 export const DealTabScreen: React.FC = () => {

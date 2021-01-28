@@ -1,0 +1,48 @@
+import {
+    CHOOSE_ADDRESS,
+    LocationActionTypes,
+    SET_LOCAL_ADDRESS,
+    USE_LOCAL_ADDRESS,
+} from "./actions"
+import { LocationState } from "./types"
+
+const initialLocationState: LocationState = {
+    selectedAddress: {
+        address: "ul. Stara Planina 11",
+        position: {
+            lat: 42.5,
+            lng: 27.46,
+        },
+        postCode: 8000,
+    },
+}
+
+export function locationReducer(
+    state: LocationState = initialLocationState,
+    action: LocationActionTypes
+): LocationState {
+    switch (action.type) {
+        case CHOOSE_ADDRESS:
+            return {
+                ...state,
+                selectedAddress: action.payload,
+            }
+        case SET_LOCAL_ADDRESS:
+            return {
+                ...state,
+                localAddress: action.payload,
+            }
+
+        case USE_LOCAL_ADDRESS:
+            if (state.localAddress) {
+                return {
+                    ...state,
+                    selectedAddress: { ...state.localAddress },
+                }
+            }
+            return state
+
+        default:
+            return state
+    }
+}

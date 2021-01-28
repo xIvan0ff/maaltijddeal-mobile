@@ -1,8 +1,22 @@
 import * as React from "react"
 import { View, Text } from "@components/Themed"
 import { ScrollView, StyleSheet } from "react-native"
-import { Restaurant } from "../types"
+import { Restaurant } from "../typesOld"
 import { Product } from "@components/Product"
+import { containerStyles } from "@styles/container"
+import { spacerStyles } from "@styles/spacer"
+import {
+    CompositeNavigationProp,
+    useNavigation,
+} from "@react-navigation/native"
+import { StackNavigationProp } from "@react-navigation/stack"
+import { MaterialTopTabNavigationProp } from "@react-navigation/material-top-tabs"
+import { HomeStackParamList, HomeTopTabParamList } from "types/navigation"
+
+type DeliveryScreenNavigationProp = CompositeNavigationProp<
+    StackNavigationProp<HomeStackParamList, "HomeTopTab">,
+    MaterialTopTabNavigationProp<HomeTopTabParamList>
+>
 
 interface IDeliveryScreenProps {}
 
@@ -20,7 +34,7 @@ const rest: Restaurant = {
     location: "location",
     logo: "logo",
     minimumOrderAmount: 2,
-    name: "name",
+    name: "Golden Eat & Greet",
     phone: "phone",
     postCode: "postcode",
     rating: 7,
@@ -32,48 +46,61 @@ const rest: Restaurant = {
 }
 
 export const DeliveryScreen: React.FC<IDeliveryScreenProps> = () => {
+    const navigation = useNavigation<DeliveryScreenNavigationProp>()
+
+    const onPress = () => {
+        navigation.push("Deal")
+    }
+
     return (
-        <View style={styles.container}>
-            <ScrollView>
-                <Product
-                    title="Shish tawook met frisdrank"
-                    state="open"
-                    price={11.01}
-                    oldPrice={13.01}
-                    discount={15}
-                    reviews={7}
-                    rating={7}
-                    restaurant={rest}
-                />
-                <Product
-                    title="Shish tawook met frisdrank"
-                    state="open"
-                    price={11.01}
-                    oldPrice={13.01}
-                    discount={15}
-                    reviews={7}
-                    rating={7}
-                    restaurant={rest}
-                />
-                <Product
-                    title="Shish tawook met frisdrank"
-                    state="open"
-                    price={11.01}
-                    oldPrice={13.01}
-                    discount={15}
-                    reviews={7}
-                    rating={7}
-                    restaurant={rest}
-                />
+        <View style={containerStyles.container}>
+            <ScrollView
+                style={{
+                    width: "100%",
+                }}
+            >
+                <View style={spacerStyles.mylg}>
+                    <Product
+                        title="Shish tawook met frisdrank"
+                        state="open"
+                        price={11.01}
+                        oldPrice={13.01}
+                        discount={15}
+                        reviews={7}
+                        rating={7}
+                        restaurant={rest}
+                        onPress={onPress}
+                    />
+                </View>
+                <View style={spacerStyles.mylg}>
+                    <Product
+                        title="Shish tawook met frisdrank"
+                        state="open"
+                        price={11.01}
+                        oldPrice={13.01}
+                        discount={15}
+                        reviews={7}
+                        rating={7}
+                        restaurant={rest}
+                        onPress={onPress}
+                    />
+                </View>
+                <View style={spacerStyles.mylg}>
+                    <Product
+                        title="Shish tawook met frisdrank"
+                        state="open"
+                        price={11.01}
+                        oldPrice={13.01}
+                        discount={15}
+                        reviews={7}
+                        rating={7}
+                        restaurant={rest}
+                        onPress={onPress}
+                    />
+                </View>
             </ScrollView>
         </View>
     )
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-    },
-})
+const styles = StyleSheet.create({})

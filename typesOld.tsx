@@ -1,15 +1,22 @@
 import { ImageSourcePropType } from "react-native"
 
 export type RootStackParamList = {
-    Root: undefined
-    NotFound: undefined
+    DrawerTab: undefined
+    DealTab: undefined
+    AddressPicker: undefined
+}
+
+export type DrawerParamList = {
+    HomeTab: undefined
+    TOSTab: undefined
+    TabOne: undefined
+    TabTwo: undefined
 }
 
 export type BottomTabParamList = {
     TabOne: undefined
     TabTwo: undefined
     HomeTab: undefined
-    DealTab: undefined
 }
 
 export type TabOneParamList = {
@@ -22,6 +29,8 @@ export type TabTwoParamList = {
 
 export type HomeTabParamList = {
     HomeTabScreen: undefined
+    DealTabScreen: undefined
+    AddressPickerScreen: undefined
 }
 
 export type Restaurant = {
@@ -54,15 +63,6 @@ export type Restaurant = {
 
 export type TOSTabParamList = {
     TOSTabScreen: undefined
-}
-
-export type DrawerParamList = {
-    HomeTab: undefined
-    TOSTab: undefined
-}
-
-export type DealTabParamList = {
-    DealTabScreen: undefined
 }
 
 export type HomeTopTabParamList = {

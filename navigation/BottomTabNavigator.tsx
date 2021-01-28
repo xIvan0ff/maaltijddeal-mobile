@@ -26,15 +26,14 @@ import {
     TabOneParamList,
     TabTwoParamList,
     TOSTabParamList,
-    DealTabParamList,
     HomeTopTabParamList,
-} from "../types"
+} from "../typesOld"
 import { useNavigation } from "@react-navigation/native"
 import { useColors } from "@hooks/useColors"
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs"
 import { DeliveryScreen } from "@screens/DeliveryScreen"
 import { PickUpScreen } from "@screens/PickUpScreen"
-import { View } from "@components/Themed"
+import { AddressPickerScreen } from "@screens/AddressPickerScreen"
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>()
 
@@ -71,15 +70,6 @@ export default function BottomTabNavigator() {
                     options={{
                         tabBarIcon: ({ color }) => (
                             <TabBarIcon name="ios-code" color={color} />
-                        ),
-                    }}
-                />
-                <BottomTab.Screen
-                    name="DealTab"
-                    component={DealTabNavigator}
-                    options={{
-                        tabBarIcon: ({ color }) => (
-                            <TabBarIcon name="ios-fast-food" color={color} />
                         ),
                     }}
                 />
@@ -150,6 +140,22 @@ function HomeTabNavigator() {
                     headerTitle: "MaaltijdDeal",
                 }}
             />
+            <HomeTabStack.Screen
+                name="DealTabScreen"
+                component={DealTabScreen}
+                options={{
+                    header: (props) => <CustomHeader {...props} />,
+                    headerTitle: "Shish tawook met frisdrank",
+                }}
+            />
+            <HomeTabStack.Screen
+                name="AddressPickerScreen"
+                component={AddressPickerScreen}
+                options={{
+                    header: (props) => <CustomHeader {...props} />,
+                    headerTitle: "Choose address",
+                }}
+            />
         </HomeTabStack.Navigator>
     )
 }
@@ -173,48 +179,49 @@ function TOSTabNavigator() {
 
 const Drawer = createDrawerNavigator<DrawerParamList>()
 
-function DrawerNavigator() {
+export function DrawerNavigator() {
     const colors = useColors()
 
     return (
-        <Drawer.Navigator
-            initialRouteName="HomeTab"
-            drawerContentOptions={{
-                activeTintColor: colors.primary,
-            }}
-        >
-            <Drawer.Screen
-                name="HomeTab"
-                options={{
-                    drawerLabel: "Home",
+        <SafeAreaView style={{ flex: 1 }}>
+            <Drawer.Navigator
+                initialRouteName="HomeTab"
+                drawerType="slide"
+                drawerContentOptions={{
+                    activeTintColor: colors.primary,
                 }}
-                component={HomeTabNavigator}
-            />
-            <Drawer.Screen
-                options={{
-                    drawerLabel: "Terms of Service",
-                }}
-                name="TOSTab"
-                component={TOSTabNavigator}
-            />
-        </Drawer.Navigator>
-    )
-}
-
-const DealTabStack = createStackNavigator<DealTabParamList>()
-
-function DealTabNavigator() {
-    return (
-        <DealTabStack.Navigator>
-            <DealTabStack.Screen
-                name="DealTabScreen"
-                component={DealTabScreen}
-                options={{
-                    header: (props) => <CustomHeader {...props} />,
-                    headerTitle: "MaaltijdСделка",
-                }}
-            />
-        </DealTabStack.Navigator>
+            >
+                <Drawer.Screen
+                    name="HomeTab"
+                    options={{
+                        drawerLabel: "Home",
+                        swipeEnabled: false,
+                    }}
+                    component={HomeTabNavigator}
+                />
+                <Drawer.Screen
+                    options={{
+                        drawerLabel: "Terms of Service",
+                    }}
+                    name="TOSTab"
+                    component={TOSTabNavigator}
+                />
+                <Drawer.Screen
+                    options={{
+                        drawerLabel: "Test 1",
+                    }}
+                    name="TabOne"
+                    component={TabOneNavigator}
+                />
+                <Drawer.Screen
+                    options={{
+                        drawerLabel: "Test 2",
+                    }}
+                    name="TabTwo"
+                    component={TabTwoNavigator}
+                />
+            </Drawer.Navigator>
+        </SafeAreaView>
     )
 }
 

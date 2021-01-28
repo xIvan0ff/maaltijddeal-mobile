@@ -8,7 +8,7 @@ import {
     Animated,
     Easing,
 } from "react-native"
-import { Filter } from "../types"
+import { Filter } from "../typesOld"
 import RangeSlider, { Slider } from "react-native-range-slider-expo"
 import { Picker } from "@react-native-picker/picker"
 import { RadioButton } from "react-native-paper"
@@ -314,7 +314,7 @@ const FilterPageStyles = StyleSheet.create({
     },
     priceButtonContainer: {
         flex: 1,
-        elevation: 4,
+        ...elevation(4),
         borderRadius: 100,
     },
     priceButton: {

@@ -1,7 +1,7 @@
 import { Product } from "@components/Product"
 import * as React from "react"
 import { StyleSheet } from "react-native"
-import { Restaurant, Review, WorkingHour } from "../types"
+import { Restaurant, Review, WorkingHour } from "../typesOld"
 
 import EditScreenInfo from "../components/EditScreenInfo"
 import { Text, View } from "../components/Themed"
@@ -95,7 +95,7 @@ const rest: Restaurant = {
     postCode: "postcode",
     rating: 7,
     ratingCount: 8,
-    reviews: [...reviews, ...reviews, ...reviews, ...reviews],
+    reviews: [...reviews],
     takeout: true,
     website: "website",
     workingHours,

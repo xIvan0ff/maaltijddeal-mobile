@@ -9,6 +9,12 @@ export const textStyles = StyleSheet.create({
         fontFamily: "rubik-bold",
     },
     small: {
-        fontSize: 12,
+        fontSize: 14,
+    },
+    big: {
+        fontSize: 20,
+    },
+    regular: {
+        fontSize: 16,
     },
 })
