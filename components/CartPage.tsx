@@ -76,7 +76,7 @@ export const CartPage: React.FC<ICartPage> = (props) => {
                         style={styles.description}
                     />
                     <View style={styles.itemsContainer}>
-                        {items.map((item) => {
+                        {items.map((item: Item) => {
                             return (
                                 <CartItem
                                     onAdd={() => {}}
@@ -112,8 +112,11 @@ export const CartPage: React.FC<ICartPage> = (props) => {
                             marginVertical: 20,
                         }}
                     >
-                        <Text>Je bespaart </Text>
-                        <Text style={{ fontSize: 30 }} colorName="secondary">
+                        <Text style={{ fontWeight: "bold" }}>Je bespaart </Text>
+                        <Text
+                            style={{ fontSize: 30, fontWeight: "bold" }}
+                            colorName="secondary"
+                        >
                             {price(1.95)}!
                         </Text>
                     </View>

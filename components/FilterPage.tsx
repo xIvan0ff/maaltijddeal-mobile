@@ -16,6 +16,7 @@ import { price } from "@utils/price"
 import { spacerStyles } from "@styles/spacer"
 import { elevation } from "@styles/elevation"
 import { createStyles } from "@styles/createStyles"
+import { PriceComponent } from "./PriceComponent"
 
 const image = require("@assets/images/americanfood.jpeg")
 
@@ -105,6 +106,12 @@ const FilterComponent: React.FC<IFilterComponent> = ({ filter, onToggle }) => {
     )
 }
 
+type PriceRange = {
+    price: number
+}
+
+const prices: PriceRange[] = [{ price: 10 }, { price: 20 }, { price: 30 }]
+
 export const FilterPage: React.FC<IFilterPage> = (props) => {
     const [filters, setFilters] = useState([
         { ...americanFilter, name: "american1" },
@@ -187,69 +194,18 @@ export const FilterPage: React.FC<IFilterPage> = (props) => {
                     justifyContent: "space-between",
                 }}
             >
-                <View
-                    style={{
-                        ...FilterPageStyles.priceButtonContainer,
-                        backgroundColor:
-                            selectedPriceRange === 10 ? "orange" : "white",
-                    }}
-                >
-                    <TouchableOpacity
-                        style={FilterPageStyles.priceButton}
-                        onPress={() =>
-                            selectedPriceRange !== 10
-                                ? setSelectedPriceRange(10)
-                                : setSelectedPriceRange(-1)
-                        }
-                    >
-                        <Text style={FilterPageStyles.priceButtonText}>
-                            {"<"}
-                            {price(10)}
-                        </Text>
-                    </TouchableOpacity>
-                </View>
-                <View
-                    style={{
-                        ...FilterPageStyles.priceButtonContainer,
-                        backgroundColor:
-                            selectedPriceRange === 20 ? "orange" : "white",
-                    }}
-                >
-                    <TouchableOpacity
-                        style={FilterPageStyles.priceButton}
-                        onPress={() =>
-                            selectedPriceRange !== 20
-                                ? setSelectedPriceRange(20)
-                                : setSelectedPriceRange(-1)
-                        }
-                    >
-                        <Text style={FilterPageStyles.priceButtonText}>
-                            {"<"}
-                            {price(20)}
-                        </Text>
-                    </TouchableOpacity>
-                </View>
-                <View
-                    style={{
-                        ...FilterPageStyles.priceButtonContainer,
-                        backgroundColor:
-                            selectedPriceRange === 30 ? "orange" : "white",
-                    }}
-                >
-                    <TouchableOpacity
-                        style={FilterPageStyles.priceButton}
-                        onPress={() =>
-                            selectedPriceRange !== 30
-                                ? setSelectedPriceRange(30)
-                                : setSelectedPriceRange(-1)
-                        }
-                    >
-                        <Text style={FilterPageStyles.priceButtonText}>
-                            {"<"}
-                            {price(30)}
-                        </Text>
-                    </TouchableOpacity>
-                </View>
+                {prices.map((currPrice) => {
+                    return (
+                        <PriceComponent
+                            key={currPrice.price}
+                            price={currPrice.price}
+                            selected={selectedPriceRange === currPrice.price}
+                            onSelect={() => {
+                                setSelectedPriceRange(currPrice.price)
+                            }}
+                        />
+                    )
+                })}
             </View>
             <ScrollView style={FilterPageStyles.filtersContainer}>
                 <View style={{ paddingBottom: 30 }}>
@@ -266,7 +222,7 @@ export const FilterPage: React.FC<IFilterPage> = (props) => {
                                                   isToggled: !currFilter.isToggled,
                                               }
                                             : currFilter
-                                    })
+                                    }),
                                 )
                             }}
                         />
@@ -325,23 +281,6 @@ export const FilterPage: React.FC<IFilterPage> = (props) => {
 const FilterPageStyles = createStyles({
     container: {
         flex: 1,
-    },
-    priceButtonContainer: {
-        width: "30%",
-        height: "100%",
-        elevation: 4,
-        borderRadius: 100,
-        backgroundColor: "white",
-    },
-    priceButton: {
-        height: "100%",
-        width: "100%",
-        alignItems: "center",
-        justifyContent: "center",
-    },
-    priceButtonText: {
-        fontSize: 20,
-        color: "black",
     },
     filtersContainer: {
         paddingVertical: 20,

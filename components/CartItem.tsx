@@ -38,10 +38,10 @@ export const CartItem: React.FC<ICartItem> = (props) => {
                     {props.value > 1 ? (
                         <Entypo name="minus" size={24} color="black" />
                     ) : (
-                        <FontAwesome5 name="trash" size={24} color="black" />
+                        <FontAwesome5 name="trash" size={20} color="black" />
                     )}
                 </TouchableOpacity>
-                <Text>{props.value}</Text>
+                <Text style={{ fontSize: 20 }}>{props.value}</Text>
                 <TouchableOpacity onPress={() => props.onAdd()}>
                     <Entypo name="plus" size={24} color="black" />
                 </TouchableOpacity>
