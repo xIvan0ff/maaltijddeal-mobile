@@ -50,24 +50,10 @@ export const CartPage: React.FC<ICartPage> = (props) => {
             </View>
             <View style={{ flex: 1, ...spacerStyles.pxmd, marginTop: 10 }}>
                 <ScrollView contentContainerStyle={{ alignItems: "center" }}>
-                    <Text
-                        style={{
-                            fontSize: 25,
-                            fontWeight: "bold",
-                            textAlign: "center",
-                        }}
-                    >
+                    <Text style={styles.bigText}>
                         Uw bestelling van Toko Nusantara (den haag)
                     </Text>
-                    <Text
-                        style={{
-                            alignSelf: "flex-start",
-                            fontWeight: "bold",
-                            fontSize: 18,
-                            marginTop: 10,
-                            marginBottom: 5,
-                        }}
-                    >
+                    <Text style={styles.descriptionTopText}>
                         Opmerkingen of vragen
                     </Text>
                     <TextInput
@@ -232,5 +218,17 @@ const styles = createStyles({
     },
     afhalenText: {
         color: "white",
+    },
+    descriptionTopText: {
+        alignSelf: "flex-start",
+        fontWeight: "bold",
+        fontSize: 18,
+        marginTop: 10,
+        marginBottom: 5,
+    },
+    bigText: {
+        fontSize: 20,
+        fontWeight: "bold",
+        textAlign: "center",
     },
 })
