@@ -39,10 +39,12 @@ export const CartPage: React.FC<ICartPage> = (props) => {
                     />
                 </TouchableOpacity>
                 <View style={{ alignItems: "center" }} colorName="secondary">
-                    <Text style={{ color: "white" }}>
+                    <Text style={{ color: "white", fontWeight: "bold" }}>
                         Toko Nusantara (den haag)
                     </Text>
-                    <Text style={{ color: "white" }}>{price(35.25)}</Text>
+                    <Text style={{ color: "white", fontWeight: "bold" }}>
+                        {price(35.25)}
+                    </Text>
                 </View>
                 <TouchableOpacity>
                     <AntDesign name="down" size={24} color="white" />
@@ -178,9 +180,11 @@ const styles = createStyles({
     },
     submitContainer1: {
         height: "100%",
-        width: "100%",
+        width: "90%",
         alignItems: "center",
         justifyContent: "center",
+        borderRadius: 5,
+        overflow: "hidden",
     },
     submitContainer2: {
         height: "100%",
@@ -190,11 +194,11 @@ const styles = createStyles({
     },
     submitText: {
         color: "white",
-        fontSize: 30,
+        fontSize: 25,
         fontWeight: "bold",
     },
     bottomLine: {
-        height: 70,
+        height: 50,
         width: "100%",
         bottom: 0,
         alignItems: "center",
@@ -210,6 +214,8 @@ const styles = createStyles({
     afhalenButtonContainer: {
         justifyContent: "center",
         alignItems: "center",
+        borderRadius: 5,
+        overflow: "hidden",
     },
     afhalenText: {
         color: "white",

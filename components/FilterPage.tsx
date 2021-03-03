@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react"
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler"
-import { Text } from "./Themed"
-import { View } from "react-native"
+import { Text, View } from "./Themed"
 import { Filter } from "../typesOld"
 import { spacerStyles } from "@styles/spacer"
 import { createStyles } from "@styles/createStyles"
 import { PriceComponent } from "./PriceComponent"
 import { FilterComponent } from "./FilterComponent"
+import { filter } from "rxjs/operators"
+import { FilterLine } from "./FilterLine"
 
 const image = require("@assets/images/americanfood.jpeg")
 
@@ -35,6 +36,15 @@ export const FilterPage: React.FC<IFilterPage> = (props) => {
         { ...americanFilter, name: "american7" },
         { ...americanFilter, name: "american8" },
         { ...americanFilter, name: "american9" },
+        // { ...americanFilter, name: "american1" },
+        // { ...americanFilter, name: "american2" },
+        // { ...americanFilter, name: "american3" },
+        // { ...americanFilter, name: "american4" },
+        // { ...americanFilter, name: "american5" },
+        // { ...americanFilter, name: "american6" },
+        // { ...americanFilter, name: "american7" },
+        // { ...americanFilter, name: "american8" },
+        // { ...americanFilter, name: "american9" },
     ])
 
     const [toggledFilters, setToggledFilters] = useState<Filter[]>([])
@@ -53,7 +63,7 @@ export const FilterPage: React.FC<IFilterPage> = (props) => {
                     setSelectedPriceRange(-1)
                 }}
             >
-                <Text style={FilterPageStyles.clearText}>
+                <Text style={FilterPageStyles.clearText} colorName="secondary">
                     Clear all filters
                 </Text>
             </TouchableOpacity>
@@ -73,6 +83,7 @@ export const FilterPage: React.FC<IFilterPage> = (props) => {
                 height: 30,
                 width: 30,
             }}
+            colorName="primary"
         >
             <Text
                 style={{
@@ -113,7 +124,11 @@ export const FilterPage: React.FC<IFilterPage> = (props) => {
                             price={currPrice.price}
                             selected={selectedPriceRange === currPrice.price}
                             onSelect={() => {
-                                setSelectedPriceRange(currPrice.price)
+                                setSelectedPriceRange(
+                                    selectedPriceRange === currPrice.price
+                                        ? -1
+                                        : currPrice.price,
+                                )
                             }}
                         />
                     )
@@ -122,7 +137,7 @@ export const FilterPage: React.FC<IFilterPage> = (props) => {
             <ScrollView style={FilterPageStyles.filtersContainer}>
                 <View style={{ paddingBottom: 30 }}>
                     {filters.map((filter) => (
-                        <FilterComponent
+                        <FilterLine
                             key={filter.name}
                             filter={filter}
                             onToggle={() => {
@@ -142,48 +157,47 @@ export const FilterPage: React.FC<IFilterPage> = (props) => {
                 </View>
             </ScrollView>
             <View style={FilterPageStyles.bottomLine}>
-                {toggledFilters.length !== 0 || selectedPriceRange !== -1 ? (
-                    clearButton
-                ) : (
-                    <View />
-                )}
-                {/* <View
+                <View
                     style={{
-                        width: "10%",
-                        height: "100%",
-                        backgroundColor: "blue",
-                        alignItems: "center",
-                        justifyContent: "center",
+                        width: "95%",
+                        flexDirection: "row",
                     }}
                 >
-                    <Text style={{ fontSize: 25, color: "white" }}>
-                        {toggledFilters.length}
-                    </Text>
-                </View> */}
-                <View style={FilterPageStyles.applyContainer}>
-                    <TouchableOpacity
-                        style={FilterPageStyles.applyButton}
-                        onPress={() => {}}
-                    >
-                        <View
-                            style={{
-                                flexDirection: "row",
-                                width: "100%",
-                                alignItems: "center",
-                                justifyContent: "center",
-                            }}
+                    {toggledFilters.length !== 0 ||
+                    selectedPriceRange !== -1 ? (
+                        clearButton
+                    ) : (
+                        <View />
+                    )}
+                    <View style={FilterPageStyles.applyContainer}>
+                        <TouchableOpacity
+                            style={FilterPageStyles.applyButton}
+                            onPress={() => {}}
                         >
-                            {toggledFilters.length !== 0 ? (
-                                toggledFiltersCounter
-                            ) : (
-                                <View />
-                            )}
+                            <View
+                                style={{
+                                    flexDirection: "row",
+                                    width: "100%",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    height: "100%",
+                                    overflow: "hidden",
+                                    borderRadius: 5,
+                                }}
+                                colorName="primary"
+                            >
+                                {toggledFilters.length !== 0 ? (
+                                    toggledFiltersCounter
+                                ) : (
+                                    <View />
+                                )}
 
-                            <Text style={FilterPageStyles.applyText}>
-                                Apply filters
-                            </Text>
-                        </View>
-                    </TouchableOpacity>
+                                <Text style={FilterPageStyles.applyText}>
+                                    Apply filters
+                                </Text>
+                            </View>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </View>
         </View>
@@ -203,30 +217,26 @@ const FilterPageStyles = createStyles({
     },
     bottomLine: {
         left: 0,
-        bottom: 0,
-        flexDirection: "row",
+        bottom: 10,
         height: 50,
         width: "100%",
+        alignItems: "center",
+        justifyContent: "center",
         ...spacerStyles.pxmd,
     },
     clearButtonContainer: {
         width: 150,
         height: 50,
-        backgroundColor: "orange",
-
         justifyContent: "center",
         alignItems: "center",
         overflow: "hidden",
-        borderRadius: 5,
     },
     clearButton: {},
     clearText: {
-        color: "white",
         fontSize: 20,
     },
     applyContainer: {
         flex: 1,
-        borderRadius: 5,
         overflow: "hidden",
     },
     applyButton: {
@@ -234,10 +244,9 @@ const FilterPageStyles = createStyles({
         width: "100%",
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "red",
     },
     applyText: {
-        fontSize: 30,
+        fontSize: 22,
         color: "white",
     },
 })
