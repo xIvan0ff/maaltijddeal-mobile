@@ -16,6 +16,7 @@ const initialLocationState: LocationState = {
         },
         postCode: "8000",
     },
+    localAddressProvider: "none",
 }
 
 export function locationReducer(
@@ -31,7 +32,8 @@ export function locationReducer(
         case SET_LOCAL_ADDRESS_SUCCESS:
             return {
                 ...state,
-                localAddress: action.payload,
+                localAddress: action.payload.address,
+                localAddressProvider: action.payload.locationProvider,
             }
 
         case USE_LOCAL_ADDRESS:
