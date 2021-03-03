@@ -21,7 +21,7 @@ type Item = {
 
 const staticItems: Item[] = [
     { value: 1, name: "name1", cost: 12 },
-    { value: 1, name: "name2", cost: 13 },
+    { value: 2, name: "name2", cost: 13 },
     { value: 1, name: "name3", cost: 14 },
 ]
 
@@ -48,26 +48,12 @@ export const CartPage: React.FC<ICartPage> = (props) => {
                     <AntDesign name="down" size={24} color="white" />
                 </TouchableOpacity>
             </View>
-            <View style={{ flex: 1, ...spacerStyles.pxmd, marginTop: 10 }}>
+            <View style={styles.content}>
                 <ScrollView contentContainerStyle={{ alignItems: "center" }}>
-                    <Text
-                        style={{
-                            fontSize: 25,
-                            fontWeight: "bold",
-                            textAlign: "center",
-                        }}
-                    >
+                    <Text style={styles.bigText}>
                         Uw bestelling van Toko Nusantara (den haag)
                     </Text>
-                    <Text
-                        style={{
-                            alignSelf: "flex-start",
-                            fontWeight: "bold",
-                            fontSize: 18,
-                            marginTop: 10,
-                            marginBottom: 5,
-                        }}
-                    >
+                    <Text style={styles.descriptionTopText}>
                         Opmerkingen of vragen
                     </Text>
                     <TextInput
@@ -76,7 +62,7 @@ export const CartPage: React.FC<ICartPage> = (props) => {
                         style={styles.description}
                     />
                     <View style={styles.itemsContainer}>
-                        {items.map((item) => {
+                        {items.map((item: Item) => {
                             return (
                                 <CartItem
                                     onAdd={() => {}}
@@ -101,19 +87,17 @@ export const CartPage: React.FC<ICartPage> = (props) => {
                         <TextLine
                             leftText="Totaal"
                             rightText={price(35.25)}
-                            textStyle={{ fontSize: 20, fontWeight: "bold" }}
+                            textStyle={styles.totalLineText}
                         />
                     </View>
-                    <View
-                        style={{
-                            alignItems: "center",
-                            justifyContent: "center",
-                            flexDirection: "row",
-                            marginVertical: 20,
-                        }}
-                    >
-                        <Text>Je bespaart </Text>
-                        <Text style={{ fontSize: 30 }} colorName="secondary">
+                    <View style={styles.savingContainer}>
+                        <Text style={{ fontWeight: "bold", fontSize: 20 }}>
+                            Je bespaart{" "}
+                        </Text>
+                        <Text
+                            style={{ fontSize: 30, fontWeight: "bold" }}
+                            colorName="secondary"
+                        >
                             {price(1.95)}!
                         </Text>
                     </View>
@@ -140,7 +124,7 @@ export const CartPage: React.FC<ICartPage> = (props) => {
                         />
                         <TextLine
                             leftText="Gratis bezorging na"
-                            rightText={price(0)}
+                            rightText={price(50)}
                         />
                     </View>
                 </ScrollView>
@@ -229,5 +213,31 @@ const styles = createStyles({
     },
     afhalenText: {
         color: "white",
+    },
+    descriptionTopText: {
+        alignSelf: "flex-start",
+        fontWeight: "bold",
+        fontSize: 18,
+        marginTop: 10,
+        marginBottom: 5,
+    },
+    bigText: {
+        fontSize: 20,
+        fontWeight: "bold",
+        textAlign: "center",
+    },
+    savingContainer: {
+        alignItems: "center",
+        justifyContent: "center",
+        flexDirection: "row",
+        marginVertical: 20,
+    },
+    totalLineText: {
+        fontWeight: "bold",
+    },
+    content: {
+        flex: 1,
+        ...spacerStyles.pxmd,
+        marginTop: 10,
     },
 })

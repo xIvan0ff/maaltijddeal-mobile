@@ -1,29 +1,16 @@
-import React, { useCallback, useEffect, useRef, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler"
 import { Text } from "./Themed"
-import {
-    StyleSheet,
-    ImageBackground,
-    View,
-    Animated,
-    Easing,
-} from "react-native"
+import { View } from "react-native"
 import { Filter } from "../typesOld"
-import RangeSlider, { Slider } from "react-native-range-slider-expo"
-import { Picker } from "@react-native-picker/picker"
-import { RadioButton } from "react-native-paper"
-import { price } from "@utils/price"
 import { spacerStyles } from "@styles/spacer"
-import { elevation } from "@styles/elevation"
 import { createStyles } from "@styles/createStyles"
+import { PriceComponent } from "./PriceComponent"
+import { FilterComponent } from "./FilterComponent"
 
 const image = require("@assets/images/americanfood.jpeg")
 
 interface IFilterPage {}
-interface IFilterComponent {
-    filter: Filter
-    onToggle: Function
-}
 
 const americanFilter: Filter = {
     name: "american",
@@ -31,79 +18,11 @@ const americanFilter: Filter = {
     isToggled: false,
 }
 
-const defaultHeight = 130
-const FilterComponent: React.FC<IFilterComponent> = ({ filter, onToggle }) => {
-    const widthValue = useRef(new Animated.Value(80)).current
-    const heightValue = useRef(new Animated.Value(0)).current
-    const animate = () => {
-        const easing = Easing.out(Easing.linear)
-        const duration = 100
-        Animated.timing(widthValue, {
-            toValue: filter.isToggled ? 90 : 80,
-            useNativeDriver: false,
-            easing,
-            duration,
-        }).start()
-        Animated.timing(heightValue, {
-            toValue: filter.isToggled ? 20 : 0,
-            useNativeDriver: false,
-            easing,
-            duration,
-        }).start()
-    }
-
-    useEffect(() => {
-        animate()
-    }, [onToggle])
-
-    return (
-        <TouchableOpacity
-            delayPressIn={0}
-            delayLongPress={0}
-            delayPressOut={0}
-            onPress={() => {
-                onToggle()
-            }}
-            style={FilterStyles.container}
-        >
-            <Animated.View
-                style={{
-                    width: widthValue.interpolate({
-                        inputRange: [0, 100],
-                        outputRange: ["0%", "100%"],
-                    }),
-                    height: heightValue.interpolate({
-                        inputRange: [0, 100],
-                        outputRange: [defaultHeight, defaultHeight * 1.5],
-                    }),
-                    flexDirection: "row",
-                    overflow: "hidden",
-                    borderRadius: 10,
-                }}
-            >
-                <ImageBackground
-                    source={filter.img}
-                    style={FilterStyles.image}
-                    imageStyle={{ width: "100%" }}
-                >
-                    <View style={FilterStyles.nameContainer}>
-                        <View style={FilterStyles.nameBackground}>
-                            <Text style={FilterStyles.name}>{filter.name}</Text>
-                        </View>
-                    </View>
-                </ImageBackground>
-                <View
-                    style={{
-                        ...FilterStyles.toggle,
-                        backgroundColor: filter.isToggled
-                            ? "rgba(16, 232, 5, 1)"
-                            : "gray",
-                    }}
-                />
-            </Animated.View>
-        </TouchableOpacity>
-    )
+type PriceRange = {
+    price: number
 }
+
+const prices: PriceRange[] = [{ price: 10 }, { price: 20 }, { price: 30 }]
 
 export const FilterPage: React.FC<IFilterPage> = (props) => {
     const [filters, setFilters] = useState([
@@ -184,72 +103,21 @@ export const FilterPage: React.FC<IFilterPage> = (props) => {
                     height: "10%",
                     width: "100%",
                     padding: 10,
-                    justifyContent: "space-between",
+                    justifyContent: "center",
                 }}
             >
-                <View
-                    style={{
-                        ...FilterPageStyles.priceButtonContainer,
-                        backgroundColor:
-                            selectedPriceRange === 10 ? "orange" : "white",
-                    }}
-                >
-                    <TouchableOpacity
-                        style={FilterPageStyles.priceButton}
-                        onPress={() =>
-                            selectedPriceRange !== 10
-                                ? setSelectedPriceRange(10)
-                                : setSelectedPriceRange(-1)
-                        }
-                    >
-                        <Text style={FilterPageStyles.priceButtonText}>
-                            {"<"}
-                            {price(10)}
-                        </Text>
-                    </TouchableOpacity>
-                </View>
-                <View
-                    style={{
-                        ...FilterPageStyles.priceButtonContainer,
-                        backgroundColor:
-                            selectedPriceRange === 20 ? "orange" : "white",
-                    }}
-                >
-                    <TouchableOpacity
-                        style={FilterPageStyles.priceButton}
-                        onPress={() =>
-                            selectedPriceRange !== 20
-                                ? setSelectedPriceRange(20)
-                                : setSelectedPriceRange(-1)
-                        }
-                    >
-                        <Text style={FilterPageStyles.priceButtonText}>
-                            {"<"}
-                            {price(20)}
-                        </Text>
-                    </TouchableOpacity>
-                </View>
-                <View
-                    style={{
-                        ...FilterPageStyles.priceButtonContainer,
-                        backgroundColor:
-                            selectedPriceRange === 30 ? "orange" : "white",
-                    }}
-                >
-                    <TouchableOpacity
-                        style={FilterPageStyles.priceButton}
-                        onPress={() =>
-                            selectedPriceRange !== 30
-                                ? setSelectedPriceRange(30)
-                                : setSelectedPriceRange(-1)
-                        }
-                    >
-                        <Text style={FilterPageStyles.priceButtonText}>
-                            {"<"}
-                            {price(30)}
-                        </Text>
-                    </TouchableOpacity>
-                </View>
+                {prices.map((currPrice) => {
+                    return (
+                        <PriceComponent
+                            key={currPrice.price}
+                            price={currPrice.price}
+                            selected={selectedPriceRange === currPrice.price}
+                            onSelect={() => {
+                                setSelectedPriceRange(currPrice.price)
+                            }}
+                        />
+                    )
+                })}
             </View>
             <ScrollView style={FilterPageStyles.filtersContainer}>
                 <View style={{ paddingBottom: 30 }}>
@@ -266,7 +134,7 @@ export const FilterPage: React.FC<IFilterPage> = (props) => {
                                                   isToggled: !currFilter.isToggled,
                                               }
                                             : currFilter
-                                    })
+                                    }),
                                 )
                             }}
                         />
@@ -326,23 +194,6 @@ const FilterPageStyles = createStyles({
     container: {
         flex: 1,
     },
-    priceButtonContainer: {
-        width: "30%",
-        height: "100%",
-        elevation: 4,
-        borderRadius: 100,
-        backgroundColor: "white",
-    },
-    priceButton: {
-        height: "100%",
-        width: "100%",
-        alignItems: "center",
-        justifyContent: "center",
-    },
-    priceButtonText: {
-        fontSize: 20,
-        color: "black",
-    },
     filtersContainer: {
         paddingVertical: 20,
     },
@@ -388,42 +239,5 @@ const FilterPageStyles = createStyles({
     applyText: {
         fontSize: 30,
         color: "white",
-    },
-})
-
-const FilterStyles = StyleSheet.create({
-    container: {
-        flexDirection: "row",
-        marginVertical: 10,
-        justifyContent: "center",
-    },
-    image: {
-        height: "100%",
-        width: "98.5%",
-    },
-    toggle: {
-        height: "100%",
-        width: "1.5%",
-    },
-    nameContainer: {
-        position: "absolute",
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        justifyContent: "center",
-        alignItems: "center",
-    },
-    nameBackground: {
-        height: "auto",
-        width: "100%",
-        backgroundColor: "rgba(66, 66, 66, 0.4)",
-        alignItems: "center",
-        justifyContent: "center",
-    },
-    name: {
-        fontSize: 50,
-        color: "white",
-        opacity: 1,
     },
 })

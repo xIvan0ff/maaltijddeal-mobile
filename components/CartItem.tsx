@@ -29,21 +29,23 @@ export const CartItem: React.FC<ICartItem> = (props) => {
             <View
                 style={{
                     flexDirection: "row",
-                    justifyContent: "space-between",
-                    width: "20%",
+                    justifyContent: "center",
+                    width: "15%",
                     alignItems: "center",
                 }}
             >
                 <TouchableOpacity onPress={() => props.onRemove()}>
                     {props.value > 1 ? (
-                        <Entypo name="minus" size={24} color="black" />
+                        <Entypo name="minus" size={18} color="black" />
                     ) : (
-                        <FontAwesome5 name="trash" size={24} color="black" />
+                        <FontAwesome5 name="trash" size={14} color="black" />
                     )}
                 </TouchableOpacity>
-                <Text>{props.value}</Text>
+                <Text style={{ fontSize: 20, marginHorizontal: 5 }}>
+                    {props.value}
+                </Text>
                 <TouchableOpacity onPress={() => props.onAdd()}>
-                    <Entypo name="plus" size={24} color="black" />
+                    <Entypo name="plus" size={18} color="black" />
                 </TouchableOpacity>
             </View>
         </View>
