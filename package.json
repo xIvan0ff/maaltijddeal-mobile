@@ -24,6 +24,7 @@
     "@react-navigation/native": "~5.8.10",
     "@react-navigation/stack": "~5.12.8",
     "axios": "^0.21.1",
+    "dealshunter-shared": "git+https://9368f5604965f4722cbd2867e3182d41a53cff42@github.com/MinRegress/dealshunter-shared.git",
     "expo": "~40.0.0",
     "expo-asset": "~8.2.1",
     "expo-constants": "~9.3.0",
@@ -64,7 +65,7 @@
     "@types/react-native": "~0.63.2",
     "@types/react-redux": "^7.1.16",
     "jest-expo": "~40.0.0",
-    "typescript": "~4.0.0"
+    "typescript": "~4.2.2"
   },
   "private": true
 }

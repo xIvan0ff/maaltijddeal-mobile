@@ -1,4 +1,5 @@
 import { Address } from "types/location"
+import { LocationProvider } from "./types"
 
 export const CHOOSE_ADDRESS = "CHOOSE_ADDRESS"
 
@@ -15,7 +16,10 @@ interface ChooseAddressAction {
 
 interface SetLocalAddressActionSuccess {
     type: typeof SET_LOCAL_ADDRESS_SUCCESS
-    payload: Address
+    payload: {
+        address: Address
+        locationProvider: LocationProvider
+    }
 }
 
 interface SetLocalAddressActionFailed {
@@ -50,10 +54,13 @@ export const locationActions = {
             type: "SET_LOCAL_ADDRESS",
         }
     },
-    setLocalAddressSuccess(address: Address): LocationActionTypes {
+    setLocalAddressSuccess(
+        address: Address,
+        locationProvider: LocationProvider
+    ): LocationActionTypes {
         return {
             type: "SET_LOCAL_ADDRESS_SUCCESS",
-            payload: address,
+            payload: { address, locationProvider },
         }
     },
     setLocalAddressFailed(): LocationActionTypes {

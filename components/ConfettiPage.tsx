@@ -42,7 +42,6 @@ export const ConfettiPage: React.FC<IConfettiPage> = (props) => {
                     style={{ height: 30, width: 30, backgroundColor: "green" }}
                     onPress={() => {
                         ref.start()
-                        console.log("log")
                     }}
                 />
             </View>
